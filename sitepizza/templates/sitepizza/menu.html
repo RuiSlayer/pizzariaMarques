@@ -1,0 +1,71 @@
+{% extends "sitepizza/template.html" %}
+{% load imagens icones %}
+
+{% block titulo %}Menu · Pizzaria Marquês{% endblock %}
+{% block descricao %}O menu da Pizzaria Marquês: oito pizzas com nome de reis portugueses, entradas, bebidas e sobremesas. Encomenda online em Oeiras.{% endblock %}
+
+{% block static %}
+<div class="container">
+    <div class="divisao com-selo">
+        {% include "sitepizza/_selo.html" with titulo="Menu" %}
+
+        <section class="menu-seccao" aria-labelledby="titulo-pizzas">
+            <h2 id="titulo-pizzas" class="titulo-seccao">Pizzas</h2>
+            <ul class="lista-pizzas">
+                {% for pizza in pizzas %}
+                <li class="pizza">
+                    <div class="pizza-foto">
+                        {% if forloop.first %}
+                        {% imagem_responsiva pizza.image sizes="(max-width: 575.98px) calc(100vw - 72px), (max-width: 767.98px) calc(85vw - 144px), 320px" alt=pizza.nome classe="imagens-menu" lazy=False prioridade=True %}
+                        {% else %}
+                        {% imagem_responsiva pizza.image sizes="(max-width: 575.98px) calc(100vw - 72px), (max-width: 767.98px) calc(85vw - 144px), 320px" alt=pizza.nome classe="imagens-menu" %}
+                        {% endif %}
+                        <span class="preco">{{ pizza.preco }}&nbsp;€</span>
+                    </div>
+                    <div class="pizza-info">
+                        <h3 class="produto-nome">{{ pizza.nome }}</h3>
+                        <p class="produto-descricao">{{ pizza.descricao }}</p>
+                        <form class="form-pedido" action="{% url 'navegar:add_carrinho' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="produto" value="{{ pizza.id }}">
+                            <label class="form-pedido-qtd">
+                                <span>Qtd.</span>
+                                <input type="number" name="quantidade" min="1" max="20" value="1" inputmode="numeric">
+                            </label>
+                            <button class="botao" type="submit">{% icone "shopping-cart" %} Pedir <span class="visually-hidden">{{ pizza.nome }}</span></button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="menu-seccao" aria-labelledby="titulo-acompanhamentos">
+            <h2 id="titulo-acompanhamentos" class="titulo-seccao">Acompanhamentos</h2>
+            <ul class="grelha-produtos">
+                {% for produto in acompanhamentos %}
+                {% include "sitepizza/_produto.html" %}
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="menu-seccao" aria-labelledby="titulo-bebidas">
+            <h2 id="titulo-bebidas" class="titulo-seccao">Bebidas</h2>
+            <ul class="grelha-produtos">
+                {% for produto in bebidas %}
+                {% include "sitepizza/_produto.html" %}
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="menu-seccao" aria-labelledby="titulo-sobremesas">
+            <h2 id="titulo-sobremesas" class="titulo-seccao">Sobremesas</h2>
+            <ul class="grelha-produtos">
+                {% for produto in sobremesas %}
+                {% include "sitepizza/_produto.html" %}
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</div>
+{% endblock %}

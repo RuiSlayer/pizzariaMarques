@@ -1,0 +1,12 @@
+{% load static %}
+<figure class="capitulo-foto">
+    <picture>
+        <source type="image/avif" sizes="(max-width: 575.98px) calc(100vw - 72px), (max-width: 767.98px) calc(85vw - 144px), calc(35vw - 90px)"
+                srcset="{% static 'img/sobre/'|add:slug|add:'/400.avif' %} 400w, {% static 'img/sobre/'|add:slug|add:'/480.avif' %} 480w, {% static 'img/sobre/'|add:slug|add:'/600.avif' %} 600w, {% static 'img/sobre/'|add:slug|add:'/800.avif' %} 800w, {% static 'img/sobre/'|add:slug|add:'/1000.avif' %} 1000w">
+        <source type="image/webp" sizes="(max-width: 575.98px) calc(100vw - 72px), (max-width: 767.98px) calc(85vw - 144px), calc(35vw - 90px)"
+                srcset="{% static 'img/sobre/'|add:slug|add:'/400.webp' %} 400w, {% static 'img/sobre/'|add:slug|add:'/480.webp' %} 480w, {% static 'img/sobre/'|add:slug|add:'/600.webp' %} 600w, {% static 'img/sobre/'|add:slug|add:'/800.webp' %} 800w, {% static 'img/sobre/'|add:slug|add:'/1000.webp' %} 1000w">
+        <img src="{% static 'img/sobre/'|add:slug|add:'/600.jpg' %}" sizes="(max-width: 575.98px) calc(100vw - 72px), (max-width: 767.98px) calc(85vw - 144px), calc(35vw - 90px)"
+             srcset="{% static 'img/sobre/'|add:slug|add:'/400.jpg' %} 400w, {% static 'img/sobre/'|add:slug|add:'/480.jpg' %} 480w, {% static 'img/sobre/'|add:slug|add:'/600.jpg' %} 600w, {% static 'img/sobre/'|add:slug|add:'/800.jpg' %} 800w, {% static 'img/sobre/'|add:slug|add:'/1000.jpg' %} 1000w"
+             width="800" height="1000" alt="{{ alt }}" {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+    </picture>
+</figure>

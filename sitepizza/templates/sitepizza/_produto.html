@@ -1,0 +1,19 @@
+{% load imagens icones %}
+<li class="produto">
+    <div class="produto-foto">
+        {% imagem_responsiva produto.image sizes="(max-width: 575.98px) calc(50vw - 44px), (max-width: 767.98px) calc(42vw - 70px), (max-width: 1199.98px) calc(28vw - 60px), calc(21vw - 50px)" alt=produto.nome classe="imagens-menu" %}
+        <span class="preco">{{ produto.preco }}&nbsp;€</span>
+    </div>
+    <h3 class="produto-nome">{{ produto.nome }}</h3>
+    <form class="form-pedido" action="{% url 'navegar:add_carrinho' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="produto" value="{{ produto.id }}">
+        <label class="form-pedido-qtd">
+            <span>Qtd.</span>
+            <input type="number" name="quantidade" min="1" max="20" value="1" inputmode="numeric">
+        </label>
+        <button class="botao botao-icone" type="submit" title="Adicionar ao carrinho">
+            {% icone "plus" %}<span class="visually-hidden">Adicionar {{ produto.nome }} ao carrinho</span>
+        </button>
+    </form>
+</li>

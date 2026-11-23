@@ -1,0 +1,11 @@
+.git
+.env
+.venv
+venv
+**/__pycache__
+node_modules
+staticfiles
+lighthouse-reports
+docs
+db.sqlite3
+storage/avatars

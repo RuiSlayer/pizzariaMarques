@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Front-end build tooling (sources are in sitepizza/assets, output in sitepizza/static/dist)
+node_modules/
+
+# collectstatic output and local reports
+staticfiles/
+lighthouse-reports/
+
+# Storage bucket: user uploads are not part of the codebase (the product catalogue seed is)
+storage/avatars/
+
+# Local database and secrets: never commit these
+db.sqlite3
+.env

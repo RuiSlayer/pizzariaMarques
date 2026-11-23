@@ -1,0 +1,28 @@
+{% extends "sitepizza/template.html" %}
+{% load icones %}
+
+{% block titulo %}Pedido finalizado · Pizzaria Marquês{% endblock %}
+
+{% block static %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+            <div class="divisao com-selo confirmacao">
+                {% include "sitepizza/_selo.html" with titulo="Obrigado!" %}
+                <p class="texto-intro">A tua comida está a caminho, {{ request.user }}.</p>
+
+                <h2 class="titulo-seccao">Detalhes do pedido</h2>
+                <dl class="perfil-dados">
+                    <dt>N.º do pedido</dt><dd>{{ checkout.pedido.id }}</dd>
+                    <dt>Entrega</dt><dd>{{ checkout.metEntrega }}</dd>
+                    <dt>Pagamento</dt><dd>{{ checkout.metPagamento }}</dd>
+                    <dt>Morada</dt><dd>{{ checkout.morada }}</dd>
+                    <dt>Total</dt><dd><strong>{{ pedido.valorPedido }}&nbsp;€</strong></dd>
+                </dl>
+
+                <a class="botao" href="{% url 'navegar:menu' %}">{% icone "utensils" %} Voltar ao menu</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

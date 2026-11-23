@@ -1,0 +1,28 @@
+{% load static icones %}
+{% comment %}
+Lightweight map: a static image first; the interactive map only loads on request.
+Params: sizes (rendered width), eager (True when the map is above the fold).
+{% endcomment %}
+<div class="mapa" data-mapa>
+    <div class="mapa-moldura" data-mapa-moldura>
+        <picture>
+            <source type="image/avif" sizes="{{ sizes }}"
+                    srcset="{% static 'img/mapa-oeiras/480.avif' %} 480w, {% static 'img/mapa-oeiras/640.avif' %} 640w, {% static 'img/mapa-oeiras/960.avif' %} 960w, {% static 'img/mapa-oeiras/1024.avif' %} 1024w, {% static 'img/mapa-oeiras/1280.avif' %} 1280w">
+            <source type="image/webp" sizes="{{ sizes }}"
+                    srcset="{% static 'img/mapa-oeiras/480.webp' %} 480w, {% static 'img/mapa-oeiras/640.webp' %} 640w, {% static 'img/mapa-oeiras/960.webp' %} 960w, {% static 'img/mapa-oeiras/1024.webp' %} 1024w, {% static 'img/mapa-oeiras/1280.webp' %} 1280w">
+            <img class="mapa-imagem" src="{% static 'img/mapa-oeiras/640.jpg' %}" sizes="{{ sizes }}"
+                 srcset="{% static 'img/mapa-oeiras/480.jpg' %} 480w, {% static 'img/mapa-oeiras/640.jpg' %} 640w, {% static 'img/mapa-oeiras/960.jpg' %} 960w, {% static 'img/mapa-oeiras/1024.jpg' %} 1024w, {% static 'img/mapa-oeiras/1280.jpg' %} 1280w"
+                 width="1280" height="640" {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"
+                 alt="Mapa de Oeiras com a localização da Pizzaria Marquês, junto à Quinta do Marquês">
+        </picture>
+    </div>
+    <div class="mapa-acoes">
+        <button type="button" class="botao" data-mapa-abrir
+                data-src="https://www.openstreetmap.org/export/embed.html?bbox=-9.3450%2C38.6865%2C-9.3110%2C38.7030&amp;layer=mapnik&amp;marker=38.69492%2C-9.32809">
+            {% icone "map" %} Ver mapa interativo
+        </button>
+        <a class="botao botao-contorno" href="https://www.google.com/maps/dir/?api=1&amp;destination=38.694915,-9.328089" target="_blank" rel="noopener">
+            {% icone "directions" %} Como chegar
+        </a>
+    </div>
+</div>

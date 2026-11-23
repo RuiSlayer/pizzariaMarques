@@ -1,0 +1,1 @@
+Mapa: imagem estática a partir de mosaicos OpenStreetMap - (c) OpenStreetMap contributors, ODbL (https://www.openstreetmap.org/copyright). A atribuição está incluída na própria imagem.

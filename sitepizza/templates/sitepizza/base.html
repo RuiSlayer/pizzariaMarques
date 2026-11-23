@@ -1,0 +1,21 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}Pizzaria Marquês · Pizzas em forno a lenha em Oeiras{% endblock %}</title>
+    <meta name="description" content="{% block descricao %}Pizzaria Marquês: pizzas de massa fresca em forno a lenha, em Oeiras desde 2009. Vê o menu, encomenda online e recebe em casa.{% endblock %}">
+    <meta name="theme-color" content="#8b0000">
+    <link rel="icon" href="{% static 'img/favicon/32.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon/180.png' %}">
+    {# Fonts are self-hosted and preloaded so text never waits on a third party. #}
+    <link rel="preload" href="{% static 'fonts/fraunces-pt-wght.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/source-sans-3-pt-wght.woff2' %}" as="font" type="font/woff2" crossorigin>
+    {% block preload %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'dist/site.min.css' %}">
+</head>
+<body class="{% block classe_body %}{% endblock %}">
+{% block corpo %}{% endblock %}
+<script src="{% static 'dist/site.min.js' %}" defer></script>
+</body>
+</html>

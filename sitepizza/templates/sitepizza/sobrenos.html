@@ -1,0 +1,76 @@
+{% extends "sitepizza/template.html" %}
+{% load static icones %}
+
+{% block titulo %}Sobre nós · Pizzaria Marquês{% endblock %}
+{% block descricao %}De um emprego de verão em Cascais a um forno a lenha em Oeiras: a história da Pizzaria Marquês, aberta desde 2009 por dois amigos de infância.{% endblock %}
+
+{% block static %}
+<div class="container">
+    <article class="divisao com-selo historia">
+        {% include "sitepizza/_selo.html" with titulo="Sobre nós" %}
+
+        <p class="historia-lead">Uma pizzaria de bairro com nome de marquês, pizzas com nome de reis e um forno a lenha que não arrefece desde 2009.</p>
+
+        <section class="capitulo" aria-labelledby="cap-1">
+            {% include "sitepizza/_foto_sobre.html" with eager=True slug="amigos" alt="Mãos a esticar uma base de pizza numa bancada de madeira enfarinhada" %}
+            <div class="capitulo-texto">
+                <p class="capitulo-ano">1998</p>
+                <h2 id="cap-1">Dois miúdos da mesma rua</h2>
+                <p>O João Trindade e o Miguel Conceição cresceram na mesma rua de Oeiras. Aos dezasseis anos arranjaram o primeiro emprego de verão numa pizzaria em Cascais: o João ao balcão, o Miguel a lavar tabuleiros e a espreitar o forno sempre que podia.</p>
+                <p>No último dia de agosto, sentados no paredão, fizeram uma promessa meio a brincar: um dia, a pizzaria havia de ser deles.</p>
+            </div>
+        </section>
+
+        <section class="capitulo" aria-labelledby="cap-2">
+            {% include "sitepizza/_foto_sobre.html" with slug="caderno" alt="Mãos com farinha a folhear um caderno de receitas" %}
+            <div class="capitulo-texto">
+                <p class="capitulo-ano">2004 – 2008</p>
+                <h2 id="cap-2">Um caderno cheio de farinha</h2>
+                <p>Enquanto o João acabava o curso de Gestão e fazia contas ao sonho nos fins de semana, o Miguel passou dois invernos em Nápoles, a trabalhar numa pizzaria de bairro.</p>
+                <p>Voltou com um caderno cheio de notas: horas de fermentação, temperaturas do forno, a maneira certa de abrir a massa com as mãos e nunca com o rolo. O caderno ainda hoje está pendurado na cozinha, com mais manchas de molho do que páginas limpas.</p>
+            </div>
+        </section>
+
+        <section class="capitulo" aria-labelledby="cap-3">
+            {% include "sitepizza/_foto_sobre.html" with slug="forno" alt="Lenha a arder dentro de um forno de tijolo" %}
+            <div class="capitulo-texto">
+                <p class="capitulo-ano">2009</p>
+                <h2 id="cap-3">Um forno e uma porta aberta</h2>
+                <p>Em 2009 encontraram uma antiga mercearia a dois passos da Quinta do Marquês. Passaram o verão a partir paredes e a levantar, tijolo a tijolo, um forno a lenha com um forneiro de Mafra.</p>
+                <p>A 2 de novembro de 2009 abriram as portas, com pizza oferecida a quem entrasse. Choveu a noite inteira, a fila deu a volta ao quarteirão e, às dez da noite, já não havia massa. Foi a melhor maneira possível de começar.</p>
+            </div>
+        </section>
+
+        <section class="capitulo" aria-labelledby="cap-4">
+            {% include "sitepizza/_foto_sobre.html" with slug="nome" alt="Painel de azulejos azuis e brancos do século XVIII com figuras numa paisagem" %}
+            <div class="capitulo-texto">
+                <p class="capitulo-ano">O nome</p>
+                <h2 id="cap-4">Porquê «Marquês»?</h2>
+                <p>Oeiras tem história com marqueses: Sebastião José de Carvalho e Melo foi Conde de Oeiras antes de ser Marquês de Pombal, e o palácio dele continua a ser uma das joias da vila. Para uma casa daqui, pareceu-nos o nome certo.</p>
+                <p>As pizzas seguiram a mesma ideia e ganharam nomes de reis. A Dom Pedro, com queijo Catupiry, é uma homenagem ao rei que também foi imperador do Brasil, e nasceu do pedido de uma vizinha brasileira que ainda cá vem todas as sextas-feiras.</p>
+            </div>
+        </section>
+
+        <section class="capitulo" aria-labelledby="cap-5">
+            {% include "sitepizza/_foto_sobre.html" with slug="hoje" alt="Pizza numa pá de madeira dentro do forno a lenha" %}
+            <div class="capitulo-texto">
+                <p class="capitulo-ano">Hoje</p>
+                <h2 id="cap-5">O mesmo forno, mais mesas</h2>
+                <p>A massa continua a ser feita todos os dias e descansa 48 horas antes de ir ao forno. A equipa cresceu, os clientes da primeira noite trazem agora os filhos e, desde 2021, também se pode encomendar online.</p>
+                <p>O forno, esse, é o mesmo. Vem prová-lo.</p>
+                <div class="capitulo-acoes">
+                    <a class="botao" href="{% url 'navegar:menu' %}">{% icone "utensils" %} Ver o menu</a>
+                    <a class="botao botao-contorno" href="{% url 'navegar:contactos' %}">{% icone "map-marker-alt" %} Onde estamos</a>
+                </div>
+            </div>
+        </section>
+
+        <ul class="numeros" aria-label="A Pizzaria Marquês em números">
+            <li><strong>2009</strong><span>abrimos portas em Oeiras</span></li>
+            <li><strong>48&nbsp;h</strong><span>de fermentação da massa</span></li>
+            <li><strong>450&nbsp;°C</strong><span>no forno a lenha</span></li>
+            <li><strong>8</strong><span>pizzas com nome de rei</span></li>
+        </ul>
+    </article>
+</div>
+{% endblock %}

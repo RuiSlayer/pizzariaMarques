@@ -1,0 +1,95 @@
+{% extends "sitepizza/template.html" %}
+{% load imagens icones %}
+
+{% block titulo %}Carrinho · Pizzaria Marquês{% endblock %}
+
+{% block static %}
+<div class="container">
+    <div class="row g-4 align-items-start">
+
+        <div class="col-lg-6">
+            <div class="divisao com-selo">
+                {% include "sitepizza/_selo.html" with titulo="Checkout" %}
+
+                <form id="form-checkout" action="{% url 'navegar:finalizar' %}" method="post">
+                    {% csrf_token %}
+
+                    <fieldset class="checkout-grupo">
+                        <legend class="titulo-seccao">Método de envio</legend>
+                        <div class="opcoes">
+                            <label class="opcao"><input type="radio" name="entrega" value="Entrega em casa" required> Entrega em casa</label>
+                            <label class="opcao"><input type="radio" name="entrega" value="Recolha no restaurante"> Recolha no restaurante</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="checkout-grupo">
+                        <legend class="titulo-seccao">Detalhes de entrega</legend>
+                        <div class="opcoes opcoes-coluna">
+                            <label class="opcao">
+                                <input type="radio" name="morada" value="{{ perfil.morada }}" data-revela="morada-registada">
+                                Morada registada
+                            </label>
+                            <p class="opcao-detalhe" id="morada-registada" hidden>{{ perfil.morada|default:"Ainda não tens uma morada registada." }}</p>
+
+                            <label class="opcao">
+                                <input type="radio" name="morada" value="morada2" data-revela="morada-outra">
+                                Outra morada
+                            </label>
+                            <div class="opcao-detalhe" id="morada-outra" hidden>
+                                <label class="visually-hidden" for="morada-nova">Nova morada</label>
+                                <input class="form-control" type="text" id="morada-nova" name="morada-nova" placeholder="Ex.: Rua da Rosa n.º 2, 1.º Esq." autocomplete="street-address">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="checkout-grupo">
+                        <legend class="titulo-seccao">Método de pagamento</legend>
+                        <div class="opcoes">
+                            <label class="opcao"><input type="radio" name="pagamento" value="Dinheiro" required> {% icone "money-bill-alt" %} Dinheiro</label>
+                            <label class="opcao"><input type="radio" name="pagamento" value="Cartao"> {% icone "credit-card" %} Cartão</label>
+                            <label class="opcao"><input type="radio" name="pagamento" value="Mbway"> {% icone "mobile-alt" %} MB WAY</label>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <section class="divisao carrinho" aria-labelledby="titulo-carrinho">
+                <h2 id="titulo-carrinho" class="titulo-seccao">Carrinho</h2>
+
+                {% if produtos_pedido %}
+                <ul class="lista-carrinho">
+                    {% for produto_pedido in produtos_pedido %}
+                    <li class="item-carrinho">
+                        {% imagem_responsiva produto_pedido.produto.image sizes="(max-width: 575.98px) 56px, 72px" alt="" classe="item-carrinho-foto" %}
+                        <div class="item-carrinho-info">
+                            <h3 class="produto-nome">{{ produto_pedido.produto }}</h3>
+                            <p class="item-carrinho-qtd">Quantidade: {{ produto_pedido.quantidade }}</p>
+                        </div>
+                        <p class="item-carrinho-preco">{{ produto_pedido.precoprodutos }}&nbsp;€</p>
+                        <form action="{% url 'navegar:remove_do_carrinho' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="produtopizza" value="{{ produto_pedido.produto.id }}">
+                            <button class="botao botao-contorno botao-pequeno" type="submit">
+                                {% icone "trash-alt" %} Remover<span class="visually-hidden"> {{ produto_pedido.produto }}</span>
+                            </button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="carrinho-vazio">O carrinho está vazio. <a href="{% url 'navegar:menu' %}">Vê o menu</a> e escolhe a tua pizza.</p>
+                {% endif %}
+
+                <div class="carrinho-total">
+                    <p>Subtotal <strong>{{ pedido.subtotal }}&nbsp;€</strong></p>
+                    <button class="botao botao-grande" type="submit" form="form-checkout"{% if not produtos_pedido %} disabled{% endif %}>
+                        {% icone "truck" %} Finalizar pedido
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
