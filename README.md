@@ -33,19 +33,22 @@ with a small, hand-tuned front end.
 
 ## Screenshots
 
-| Menu | Sobre nós |
+| Menu, right after adding a pizza | Cart |
 |---|---|
-| ![Menu](docs/images/desktop-menu.webp) | ![Sobre nós](docs/images/desktop-sobre.webp) |
+| ![Menu: the quantity stepper, the "Adicionado" confirmation, the notice with a link to the cart and the cart count in the header](docs/images/desktop-menu.webp) | ![Cart: each line with a quantity stepper and a Remover button, next to the delivery and payment options](docs/images/desktop-carrinho.webp) |
+
+| Home in English | Sobre nós |
+|---|---|
+| ![Home page in English, with the English banner](docs/images/desktop-home-en.webp) | ![Sobre nós](docs/images/desktop-sobre.webp) |
 
 | Contactos | Login |
 |---|---|
-| ![Contactos](docs/images/desktop-contactos.webp) | ![Login](docs/images/desktop-login.webp) |
+| ![Contactos](docs/images/desktop-contactos.webp) | ![Login, with the PT / EN switch in the corner](docs/images/desktop-login.webp) |
 
-On phones (390 px): home, menu and *Sobre nós*.
+On phones (390 px): home (with the PT / EN switch and the cart count), the menu's quantity stepper,
+and the cart.
 
-The screenshots predate the PT / EN switch, the quantity stepper and the cart controls.
-
-![Mobile layouts](docs/images/mobile.webp)
+![Mobile layouts: home, menu and cart](docs/images/mobile.webp)
 
 ## Tech stack
 
