@@ -23,12 +23,13 @@ with a small, hand-tuned front end.
 
 | Area | What it does |
 |---|---|
-| Menu | Pizzas (named after Portuguese kings), sides, drinks and desserts, each with a photo and price; add to cart with a quantity |
-| Cart and checkout | Delivery or restaurant pick-up, registered or new address, cash / card / MB WAY; totals are computed server-side |
-| Accounts | Registration with address and phone, login/logout, profile page with photo upload |
+| Menu | Pizzas (named after Portuguese kings), sides, drinks and desserts, each with a photo and price. Pick a quantity (1–20) with a − n + stepper and add to the cart without leaving the page: the button confirms, a notice links to the cart, and the cart count in the header goes up |
+| Cart and checkout | Change a quantity (− n +) or remove a product right in the cart, without reloading; up to 20 of each product. Delivery or restaurant pick-up, registered or new address, cash / card / MB WAY; totals are computed server-side and stored as decimals |
+| Accounts | Registration with address and a Portuguese phone number (typed with or without spaces or +351), login/logout that returns the visitor to where they were going (e.g. the product they tried to add), profile page with photo upload (JPG or PNG up to 2 MB) |
 | Content pages | Home with a hero carousel, *Sobre nós* (the pizzeria's story), *Contactos* with a map |
+| Languages | Portuguese by default, English through the PT / EN switch at the top of every page; the choice is kept in a cookie. Product names, ingredients and order details are translated too, and the home banners (copy set in the artwork) have an English version |
 | Responsive | Layouts for 320 px phones up to large desktops; images served at the size and format each device needs |
-| Accessibility | Skip link, landmarks, labelled forms, visible focus, AA contrast, no auto-rotating carousel until the visitor engages, `prefers-reduced-motion` respected |
+| Accessibility | Skip link, landmarks, labelled forms, visible focus, AA contrast, no auto-rotating carousel until the visitor engages, `prefers-reduced-motion` respected; cart changes are announced to screen readers and keyboard focus is never lost |
 
 ## Screenshots
 
@@ -42,6 +43,8 @@ with a small, hand-tuned front end.
 
 On phones (390 px): home, menu and *Sobre nós*.
 
+The screenshots predate the PT / EN switch, the quantity stepper and the cart controls.
+
 ![Mobile layouts](docs/images/mobile.webp)
 
 ## Tech stack
@@ -52,7 +55,8 @@ On phones (390 px): home, menu and *Sobre nós*.
 | Web framework | Django 3.2 (MVT, ORM, auth, messages, sessions, staticfiles) |
 | Database | PostgreSQL 17 in Docker; SQLite (`db.sqlite3`, not committed) for local development |
 | Deployment | Docker Compose: gunicorn app container, PostgreSQL container, Cloudflare Tunnel (`cloudflared`) for public HTTPS |
-| Images | Pillow 11.3+ (resizing, AVIF / WebP / JPEG encoding) |
+| Languages | Django i18n (gettext): Portuguese source texts, English catalogue in `sitepizza/locale/en/` |
+| Images | Pillow 11.3+ (resizing, AVIF / WebP / JPEG encoding, upload checks); OpenCV (shift-map inpainting) for the English banners, build-time only |
 | Static file serving | WhiteNoise 6.5 (hashed file names, Brotli/gzip, immutable caching) |
 | UI toolkit | Bootstrap 5.0 (grid, carousel, collapse, alerts), purged to the classes the templates use |
 | Typefaces | Fraunces and Source Sans 3, self-hosted variable fonts (SIL OFL) |
@@ -133,6 +137,13 @@ npm run build          # sitepizza/assets/{css,js} -> sitepizza/static/dist/*.mi
 ```
 
 Edit `sitepizza/assets/css/style.css` and `sitepizza/assets/js/site.js`, never the files in `dist/`.
+After changing text in templates or Python code, update the English translation:
+`cd sitepizza && python ../manage.py makemessages -l en --no-obsolete`, fill in the new entries in
+`locale/en/LC_MESSAGES/django.po`, then `python ../manage.py compilemessages` (needs GNU gettext).
+The compiled `django.mo` is committed, so the Docker image doesn't need gettext.
+The home banners have their copy in the image; their English set (`img/banners/*-en/`) is made from
+the Portuguese artwork by `python tools/banners-en.py` (needs `npm install` for the fonts and
+`pip install numpy opencv-contrib-python-headless`). Run it again after changing a banner.
 To re-trim the fonts (only needed when the weights or characters change):
 `pip install fonttools brotli && python tools/subset-fonts.py`.
 
@@ -202,12 +213,14 @@ Writes an HTML + JSON report per run and a `summary.json`.
 │   │   │   └── source-sans-3-pt-wght.woff2
 │   │   └── js/
 │   │       └── site.js
+│   ├── locale/en/LC_MESSAGES/           English translation (django.po, compiled django.mo)
 │   ├── management/
 │   │   ├── __init__.py
 │   │   └── commands/
 │   │       ├── __init__.py
 │   │       └── gerar_variantes.py       backfills responsive image sizes
-│   ├── migrations/                      schema history; 0027-0029 are data migrations (0029 seeds the menu)
+│   ├── migrations/                      schema history; 0027-0029 are data migrations (0029 seeds the menu),
+│   │                                    0030 stores order totals as decimals, 0031 sets price and address limits
 │   ├── static/                          the app's own assets (never uploads)
 │   │   ├── dist/
 │   │   │   ├── site.min.css
@@ -219,11 +232,10 @@ Writes an HTML + JSON report per run and a `summary.json`.
 │   │       ├── avatar/                  40.webp  80.webp  200.png
 │   │       ├── banners/
 │   │       │   ├── entradas/            480 630 720 945 1260 (.avif .webp .jpg)
+│   │       │   ├── entradas-en/         the same banner in English (output of tools/banners-en.py)
 │   │       │   ├── entradas-largo/      1260 1890 2520 (.avif .webp .jpg)
-│   │       │   ├── forno/
-│   │       │   ├── forno-largo/
-│   │       │   ├── online/
-│   │       │   └── online-largo/
+│   │       │   ├── forno/  forno-en/  forno-largo/  forno-largo-en/
+│   │       │   └── online/  online-en/  online-largo/  online-largo-en/
 │   │       ├── favicon/                 32.png  180.png
 │   │       ├── fundo-pedra/             400 and 640 (.avif .webp .jpg)
 │   │       ├── logo/                    80.webp  160.webp
@@ -249,22 +261,29 @@ Writes an HTML + JSON report per run and a `summary.json`.
 │   │       ├── perfil.html
 │   │       ├── login.html
 │   │       ├── registo.html
+│   │       ├── _banner.html             partial: home carousel banner, Portuguese or English artwork
 │   │       ├── _campo.html              partial: labelled form field
 │   │       ├── _foto_sobre.html         partial: About-page photo
+│   │       ├── _idioma.html             partial: PT / EN language switch
 │   │       ├── _mapa.html               partial: static map + interactive map on request
 │   │       ├── _produto.html            partial: menu product card
+│   │       ├── _quantidade.html         partial: − n + quantity stepper (menu)
 │   │       └── _selo.html               partial: wax-seal page title
 │   ├── templatetags/
 │   │   ├── __init__.py
 │   │   ├── icones.py                    {% icone %}
-│   │   └── imagens.py                   {% imagem_responsiva %}
+│   │   ├── imagens.py                   {% imagem_responsiva %}
+│   │   └── traducoes.py                 {{ texto|traduzir }} for database texts
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py                          signal handlers that keep the bucket in sync
 │   ├── forms.py
+│   ├── catalogo_i18n.py                 database texts (products, checkout choices) to translate
+│   ├── contexto.py                      context processors: cart count, shared limits
 │   ├── icones_svg.py                    generated: SVG paths of the icons in use
+│   ├── idioma.py                        middleware: applies the language chosen with the PT / EN switch
 │   ├── imagens.py                       responsive image generation, lookup and cleanup
-│   ├── models.py
+│   ├── models.py                        models and the shared limits (price, address, quantity)
 │   ├── urls.py
 │   └── views.py
 ├── storage/                             storage bucket (MEDIA_ROOT, served at /media/)
@@ -274,6 +293,7 @@ Writes an HTML + JSON report per run and a `summary.json`.
 │       ├── dom-manuel/                  original.jpg + 160 320 480 640 960 1280 (.avif .webp .jpg)
 │       └── ...                          one directory per product
 ├── tools/
+│   ├── banners-en.py                    English versions of the home banners
 │   ├── build-assets.mjs                 CSS/JS/font/icon build
 │   ├── lighthouse-run.mjs               Lighthouse test matrix
 │   └── subset-fonts.py                  font trimming
@@ -303,13 +323,14 @@ flowchart LR
     CF -->|HTTP| G[gunicorn<br/>web container]
     G --> W[WhiteNoise middleware]
     W -->|"/static/*"| S[(Hashed, compressed<br/>static files)]
-    W --> D[Django middleware<br/>sessions, CSRF, auth, messages, gzip]
+    W --> D[Django middleware<br/>sessions, language, CSRF, auth, messages, gzip]
     D --> U[URL dispatcher<br/>sitepizza/urls.py]
     U --> V[Views<br/>views.py]
     V --> F[Forms<br/>forms.py]
     V --> M[Models<br/>models.py]
     M --> DB[(PostgreSQL<br/>SQLite in development)]
     V --> T[Templates<br/>base, layout, pages, partials]
+    CP[Context processors<br/>contexto.py: cart count, limits] --> T
     T --> TT[Template tags<br/>imagem_responsiva, icone]
     TT --> I[Image variants<br/>storage/ + imagens.py]
     U -->|"/media/*"| MS[Storage bucket<br/>storage/ uploads]
@@ -343,7 +364,7 @@ erDiagram
         int quantidade
     }
     PEDIDO {
-        float valorPedido
+        decimal valorPedido
         datetime dataPedido
         string estado
         bool ordered
@@ -365,13 +386,18 @@ sequenceDiagram
     participant Menu as /menu
     participant Cart as /add_carrinho
     participant Checkout as /menu/checkout
+    participant Change as /alterar_carrinho
     participant Done as /checkout/finalizar
     C->>Menu: browse
-    C->>Cart: POST product + quantity
-    Cart-->>C: redirect to menu, "Produto adicionado"
-    C->>Checkout: review cart, choose delivery and payment
+    C->>Cart: POST product + quantity (1-20)
+    Note over Cart: logged out: to login, then back to the product<br/>more than 20 of a product in the cart: refused
+    Cart-->>C: JSON (page updates in place)<br/>or, without JS, redirect to the product
+    C->>Checkout: review cart
+    C->>Change: POST product + new quantity (0 removes)
+    Change-->>C: JSON (line, subtotal and count update)<br/>or, without JS, redirect to the cart line
+    C->>Checkout: choose delivery and payment
     C->>Done: POST checkout form
-    Note over Done: validate choices, compute total server-side,<br/>create Checkout, mark order as placed (one transaction)
+    Note over Done: validate choices and address length, compute total server-side<br/>(Decimal, checked against the column's maximum),<br/>create Checkout, mark order as placed (one transaction)
     Done-->>C: redirect to confirmation page
 ```
 
@@ -381,28 +407,56 @@ sequenceDiagram
 |---|---|
 | Model-View-Template | Django's request handling: `models.py`, `views.py`, `templates/` |
 | Template inheritance (Template Method) | `base.html` defines the document skeleton and blocks; `template.html` fills in the site layout; pages override `static`, `titulo`, `descricao`, `preload`. Login/registration extend `base.html` directly, keeping the background but not the shop layout |
-| Composition through partials | `_produto.html`, `_mapa.html`, `_selo.html`, `_campo.html`, `_foto_sobre.html` are parameterised with `{% include ... with %}` |
+| Composition through partials | `_produto.html`, `_quantidade.html`, `_banner.html`, `_idioma.html`, `_mapa.html`, `_selo.html`, `_campo.html`, `_foto_sobre.html` are parameterised with `{% include ... with %}` |
 | Facade | `{% imagem_responsiva %}` hides variant lookup, formats, `srcset`/`sizes`, dimensions and loading hints behind one tag |
 | Observer | `pre_save`, `post_save` and `post_delete` signals on `Produto` and `Perfil` (connected in `SitepizzaConfig.ready()`) generate image sizes on upload and remove replaced or deleted image directories |
 | Command | `manage.py gerar_variantes` (a `BaseCommand` subclass) backfills sizes for existing images |
+| Decorator | `_login_e_voltar_a()` in `views.py`: login for POST-only views that returns to a page (the cart, home) instead of the form's URL |
+| Middleware | `IdiomaMiddleware` (`idioma.py`) applies the language chosen with the PT / EN switch, Portuguese otherwise |
+| Context processor | `contexto.py` gives every template the cart count (lazily, only when a template uses it) and the shared limits |
+| Single source of truth | each limit is defined once (`models.py`, `views.py`) and reaches the inputs, the script and the checks from there; see [Limits](#limits) |
+| Idempotent requests | the cart's − / + / Remover post the quantity they lead to, not a step, so a repeated request can't remove twice |
 | Data migration | `0027_imagens_produtos` points products at the new photo set; `0028_storage_bucket` moves uploads into the bucket layout; `0029_catalogo_inicial` creates the menu on an empty database. All reproducible instead of by hand |
 | Inheritance and encapsulation (OOP) | `CreateUserForm` extends `UserCreationForm`; `PerfilForm` is a `ModelForm`; models own their behaviour (`Pedido.subtotal()`, `ProdutoPedido.precoprodutos()`, `__str__`) |
-| Progressive enhancement | The map is a static image until "Ver mapa interativo" is clicked; checkout options work without JS; the carousel only auto-rotates after the visitor interacts |
+| Progressive enhancement | The map is a static image until "Ver mapa interativo" is clicked; checkout options work without JS; the carousel only auto-rotates after the visitor interacts; adding to and changing the cart are plain forms that JS upgrades to in-place updates (and falls back to on any unexpected answer); the stepper's − / + only appear when JS runs, decided before the first paint |
 | Configuration via environment | `DJANGO_DEBUG`, `DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS` and `POSTGRES_*` select development or production behaviour and the database without code changes; secrets stay out of the repository |
 
 ### Practices applied
 
 - **Security:** CSRF tokens on every form, `@require_POST` on state-changing views, `@login_required`
   on account and order views, totals computed on the server instead of trusted from the form,
+  every limit checked on the server as well as in the page (see [Limits](#limits)), cart changes limited
+  to the visitor's own cart, uploaded photos opened and checked as real JPEG/PNG files (the browser's
+  content type is not trusted), and post-login redirects only to pages on this site,
   `rel="noopener"` on external links, and the third-party map iframe loaded with `referrerpolicy="no-referrer"`.
   In production the secret key and database password come from `.env` (never committed), cookies are
   HTTPS-only, and the app port is bound to localhost, so traffic only arrives through the tunnel.
 - **Accessibility:** semantic landmarks (`header`, `nav`, `main`, `footer`), one `h1` per page, labelled inputs and
   fieldsets, a skip link, visible focus styles, WCAG AA contrast, `aria-current` on the active page,
-  hidden text for icon-only buttons.
+  hidden text for icon-only buttons, live regions for changes made without reloading (cart, quantity),
+  `aria-disabled` instead of `disabled` at a stepper's limits so keyboard focus stays put, and focus moved
+  to the next line (or the cart heading) when a product is removed.
 - **Performance:** see [Front-end build and performance](#front-end-build-and-performance).
 - **Maintainability:** CSS design tokens (custom properties), build sources separated from build output,
-  generated files marked as generated, credits stored next to the assets they cover.
+  generated files marked as generated, credits stored next to the assets they cover, limits defined
+  once and shared, money kept in `Decimal` end to end.
+
+### Limits
+
+Every limit is defined once and enforced on the server; the page uses the same value for its inputs.
+
+| Limit | Value | Defined in | In the page | On the server |
+|---|---|---|---|---|
+| Product price | 0,01 – 999,99 € | `PRECO_MINIMO`, `Produto.preco` (`Decimal(5, 2)`) in `models.py` | set in the admin | model validators (admin form) |
+| Quantity per add (menu) | 1 – 20 | `QTD_MAXIMA` in `models.py` | stepper `min`/`max`, script clamps typed values | `add_carrinho` |
+| Quantity per product in the cart | 1 – 20 | `QTD_MAXIMA` | cart stepper: − dims at 1, + at 20 | `add_carrinho` (cart total), `alterar_carrinho` |
+| Order total | up to 999 999,99 € | `Pedido.valorPedido` (`Decimal(8, 2)`), read as `TOTAL_MAXIMO` in `views.py` | — | `finalizar`, before saving (unreachable with 20 per product until the menu passes 50 products) |
+| Address (registration, checkout) | 150 characters | `MORADA_MAX` in `models.py` | `maxlength` on both inputs | `PerfilForm`, `finalizar` |
+| Phone | Portuguese number, 9 digits starting with 9 or 2 | `PerfilForm.clean_telemovel` | `type="tel"` (phone keypad) | accepts spaces, dashes, dots, `+351` / `00351`; stores the 9 digits |
+| Profile photo | JPG or PNG, up to 2 MB | `FOTO_FORMATOS`, `FOTO_MAX_BYTES` in `views.py` | `accept="image/jpeg,image/png"`, hint on the page | the file is opened with Pillow and its real format checked |
+
+Prices and totals are `Decimal` with 2 places everywhere (database, views, JSON answers), so amounts
+always show as `13,00 €` / `13.00 €`; prices are never sent by the browser.
 
 ## Front-end build and performance
 
@@ -432,8 +486,8 @@ What the build and templates do, and why:
 
 | Technique | Effect |
 |---|---|
-| Purged Bootstrap + one minified stylesheet | 30 KB CSS (7.4 KB compressed) instead of 155 KB Bootstrap + extra stylesheets |
-| One JS bundle with only the components in use | 7 KB compressed; no jQuery, no second Bootstrap version |
+| Purged Bootstrap + one minified stylesheet | 35 KB CSS (8.3 KB compressed) instead of 155 KB Bootstrap + extra stylesheets |
+| One JS bundle with only the components in use | 25 KB (8.5 KB compressed), including the cart and stepper code; no jQuery, no second Bootstrap version |
 | Inline SVG icons | no icon font or icon stylesheet blocking the first paint |
 | Self-hosted, preloaded, trimmed variable fonts | about 40 KB for both families; metric-matched fallbacks keep the layout from shifting while they load |
 | Seamless texture tiles | 640 px stone and parchment tiles (73 KB and 13 KB as AVIF) replace 1.6 MB and 0.5 MB photos; phones get a 21 KB stone tile |
@@ -444,7 +498,8 @@ What the build and templates do, and why:
 
 ### Lighthouse results
 
-Measured on a production-like run (`DEBUG` off, WhiteNoise) with Lighthouse 12.2.1. Scores are
+Measured on a production-like run (`DEBUG` off, WhiteNoise) with Lighthouse 12.2.1, before the English
+version, the quantity stepper and the in-place cart were added (not re-measured since). Scores are
 Performance / Accessibility / Best Practices / SEO.
 
 | Page | Mobile | Desktop | Desktop, DevTools throttling |

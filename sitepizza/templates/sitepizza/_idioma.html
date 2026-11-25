@@ -1,0 +1,16 @@
+{% load i18n icones %}
+{% comment %}
+PT / EN switch. A plain form posting to Django's set_language view, so it works without JS;
+the view stores the choice in the language cookie and returns to the same page.
+Params: classe (extra class for placement).
+{% endcomment %}
+{% get_current_language as idioma_atual %}
+<form class="idioma{% if classe %} {{ classe }}{% endif %}" action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+    <div class="idioma-opcoes" role="group" aria-label="{% trans 'Idioma' %}">
+        {% icone "globe" "idioma-icone" %}
+        <button class="idioma-opcao" type="submit" name="language" value="pt-pt" lang="pt-PT" title="Português" aria-pressed="{% if idioma_atual == 'pt-pt' %}true{% else %}false{% endif %}"><span aria-hidden="true">PT</span><span class="visually-hidden">Português</span></button>
+        <button class="idioma-opcao" type="submit" name="language" value="en" lang="en" title="English" aria-pressed="{% if idioma_atual == 'en' %}true{% else %}false{% endif %}"><span aria-hidden="true">EN</span><span class="visually-hidden">English</span></button>
+    </div>
+</form>

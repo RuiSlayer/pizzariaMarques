@@ -1,4 +1,4 @@
-{% load static icones %}
+{% load static i18n icones %}
 {% comment %}
 Lightweight map: a static image first; the interactive map only loads on request.
 Params: sizes (rendered width), eager (True when the map is above the fold).
@@ -13,16 +13,18 @@ Params: sizes (rendered width), eager (True when the map is above the fold).
             <img class="mapa-imagem" src="{% static 'img/mapa-oeiras/640.jpg' %}" sizes="{{ sizes }}"
                  srcset="{% static 'img/mapa-oeiras/480.jpg' %} 480w, {% static 'img/mapa-oeiras/640.jpg' %} 640w, {% static 'img/mapa-oeiras/960.jpg' %} 960w, {% static 'img/mapa-oeiras/1024.jpg' %} 1024w, {% static 'img/mapa-oeiras/1280.jpg' %} 1280w"
                  width="1280" height="640" {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"
-                 alt="Mapa de Oeiras com a localização da Pizzaria Marquês, junto à Quinta do Marquês">
+                 alt="{% trans 'Mapa de Oeiras com a localização da Pizzaria Marquês, junto à Quinta do Marquês' %}">
         </picture>
     </div>
     <div class="mapa-acoes">
         <button type="button" class="botao" data-mapa-abrir
+                data-titulo="{% trans 'Mapa interativo com a localização da Pizzaria Marquês' %}"
+                data-aberto="{% trans 'Mapa interativo aberto' %}"
                 data-src="https://www.openstreetmap.org/export/embed.html?bbox=-9.3450%2C38.6865%2C-9.3110%2C38.7030&amp;layer=mapnik&amp;marker=38.69492%2C-9.32809">
-            {% icone "map" %} Ver mapa interativo
+            {% icone "map" %} {% trans "Ver mapa interativo" %}
         </button>
         <a class="botao botao-contorno" href="https://www.google.com/maps/dir/?api=1&amp;destination=38.694915,-9.328089" target="_blank" rel="noopener">
-            {% icone "directions" %} Como chegar
+            {% icone "directions" %} {% trans "Como chegar" %}
         </a>
     </div>
 </div>

@@ -1,14 +1,14 @@
 {% extends "sitepizza/template.html" %}
-{% load static imagens icones %}
+{% load static i18n imagens icones %}
 
-{% block titulo %}Perfil · Pizzaria Marquês{% endblock %}
+{% block titulo %}{% trans "Perfil · Pizzaria Marquês" %}{% endblock %}
 
 {% block static %}
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
             <div class="divisao com-selo perfil">
-                {% include "sitepizza/_selo.html" with titulo="Perfil" %}
+                {% include "sitepizza/_selo.html" with titulo=_("Perfil") %}
 
                 <div class="perfil-cabecalho">
                     {% if perfil.image %}
@@ -16,22 +16,22 @@
                     {% else %}
                     <img class="perfil-foto" src="{% static 'img/avatar/200.png' %}" width="160" height="160" alt="">
                     {% endif %}
-                    <h2 class="titulo-seccao">Olá, {{ request.user }}.</h2>
+                    <h2 class="titulo-seccao">{% blocktrans with nome=request.user.username %}Olá, {{ nome }}.{% endblocktrans %}</h2>
                 </div>
 
                 <form class="perfil-upload" method="post" enctype="multipart/form-data" action="{% url 'navegar:fazer_upload' %}">
                     {% csrf_token %}
-                    <label class="form-label" for="foto-perfil">Foto de perfil <span class="texto-ajuda">(JPG ou PNG, até 2 MB)</span></label>
+                    <label class="form-label" for="foto-perfil">{% trans "Foto de perfil" %} <span class="texto-ajuda">{% trans "(JPG ou PNG, até 2 MB)" %}</span></label>
                     <div class="perfil-upload-linha">
-                        <input class="form-control" type="file" id="foto-perfil" name="myfile" accept="image/*" required>
-                        <button class="botao" type="submit">{% icone "camera" %} Atualizar</button>
+                        <input class="form-control" type="file" id="foto-perfil" name="myfile" accept="image/jpeg,image/png" required>
+                        <button class="botao" type="submit">{% icone "camera" %} {% trans "Atualizar" %}</button>
                     </div>
                 </form>
 
                 <dl class="perfil-dados">
-                    <dt>Morada</dt>
+                    <dt>{% trans "Morada" %}</dt>
                     <dd>{{ perfil.morada|default:"—" }}</dd>
-                    <dt>Telemóvel</dt>
+                    <dt>{% trans "Telemóvel" %}</dt>
                     <dd>{{ perfil.telemovel|default:"—" }}</dd>
                 </dl>
             </div>

@@ -1,0 +1,881 @@
+# English translation of the Pizzaria Marquês site.
+# Regenerate msgids with: python manage.py makemessages -l en --no-obsolete (from sitepizza/)
+# Compile with: python manage.py compilemessages
+msgid ""
+msgstr ""
+"Project-Id-Version: Pizzaria Marquês\n"
+"POT-Creation-Date: 2026-11-25 18:31+0000\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: catalogo_i18n.py:13
+msgid "Pão de Alho"
+msgstr "Garlic Bread"
+
+#: catalogo_i18n.py:14
+msgid "Asas de Frango"
+msgstr "Chicken Wings"
+
+#: catalogo_i18n.py:15
+msgid "Nuggets"
+msgstr "Nuggets"
+
+#: catalogo_i18n.py:16
+msgid "Água 1,5L"
+msgstr "Water 1.5L"
+
+#: catalogo_i18n.py:17
+msgid "Coca-Cola 1,5L"
+msgstr "Coca-Cola 1.5L"
+
+#: catalogo_i18n.py:18
+msgid "Ice Tea 1,5L"
+msgstr "Iced Tea 1.5L"
+
+#: catalogo_i18n.py:19
+msgid "Sumol 1,5L"
+msgstr "Sumol 1.5L"
+
+#: catalogo_i18n.py:20
+msgid "Mousse"
+msgstr "Chocolate Mousse"
+
+#: catalogo_i18n.py:21
+msgid "Crepe de Chocolate"
+msgstr "Chocolate Crepe"
+
+#: catalogo_i18n.py:22
+msgid "Gelado"
+msgstr "Ice Cream"
+
+#: catalogo_i18n.py:23
+msgid "Waffle"
+msgstr "Waffle"
+
+#: catalogo_i18n.py:25
+msgid ""
+"Ingredientes: Molho de Tomate, Mozzarella, Extra Queijo, Pepperoni, Pimentos"
+msgstr ""
+"Ingredients: Tomato Sauce, Mozzarella, Extra Cheese, Pepperoni, Peppers"
+
+#: catalogo_i18n.py:26
+msgid ""
+"Ingredientes: Molho de Tomate, Mozzarella, Frango, Queijo Catupiry, Milho, "
+"Ananás"
+msgstr ""
+"Ingredients: Tomato Sauce, Mozzarella, Chicken, Catupiry Cheese, Sweetcorn, "
+"Pineapple"
+
+#: catalogo_i18n.py:27
+msgid ""
+"Ingredientes: Molho de Tomate, Mozzarela, Bacon, Azeitonas Pretas, Extra "
+"queijo, Cogumelos"
+msgstr ""
+"Ingredients: Tomato Sauce, Mozzarella, Bacon, Black Olives, Extra Cheese, "
+"Mushrooms"
+
+#: catalogo_i18n.py:28
+msgid ""
+"Ingredientes: Molho de Tomate, Mozzarela, Cabra, Extra Mozzarela, Provolore,"
+" e Parmesão"
+msgstr ""
+"Ingredients: Tomato Sauce, Mozzarella, Goat Cheese, Extra Mozzarella, "
+"Provolone and Parmesan"
+
+#: catalogo_i18n.py:29
+msgid ""
+"Ingredientes: Molho Barbecue, Mozzarela, Calabresa, Cebola, extra queijo"
+msgstr ""
+"Ingredients: Barbecue Sauce, Mozzarella, Calabrese Sausage, Onion, Extra "
+"Cheese"
+
+#: catalogo_i18n.py:30
+msgid "Ingredientes: Molho de Tomate, Mozzarella, Atum, Cebola, Tomate, Milho"
+msgstr "Ingredients: Tomato Sauce, Mozzarella, Tuna, Onion, Tomato, Sweetcorn"
+
+#: catalogo_i18n.py:31
+msgid ""
+"Ingredientes: Molho de Tomate, Mozzarela, Bacon, Carne Picada, Azeitonas, "
+"Cebola"
+msgstr ""
+"Ingredients: Tomato Sauce, Mozzarella, Bacon, Minced Beef, Olives, Onion"
+
+#: catalogo_i18n.py:32
+msgid ""
+"Ingredientes: Molho de Tomate, Mozzarela, Cogumelos, Azeitonas, Ovo, Milho"
+msgstr ""
+"Ingredients: Tomato Sauce, Mozzarella, Mushrooms, Olives, Egg, Sweetcorn"
+
+#: catalogo_i18n.py:33
+msgid "Quentinho"
+msgstr "Served warm"
+
+#: catalogo_i18n.py:35 templates/sitepizza/checkout.html:48
+msgid "Dinheiro"
+msgstr "Cash"
+
+#: catalogo_i18n.py:36
+msgid "Cartao"
+msgstr "Card"
+
+#: catalogo_i18n.py:37
+msgid "Mbway"
+msgstr "MB WAY"
+
+#: forms.py:16 templates/sitepizza/login.html:27
+msgid "Nome de utilizador"
+msgstr "Username"
+
+#: forms.py:16
+msgid "ex.: joao.silva"
+msgstr "e.g. john.smith"
+
+#: forms.py:17 templates/sitepizza/contactos.html:40
+msgid "Email"
+msgstr "Email"
+
+#: forms.py:17
+msgid "nome@exemplo.pt"
+msgstr "name@example.com"
+
+#: forms.py:18 templates/sitepizza/login.html:31
+msgid "Palavra-passe"
+msgstr "Password"
+
+#: forms.py:18
+msgid "Escolhe uma palavra-passe"
+msgstr "Choose a password"
+
+#: forms.py:19
+msgid "Confirmar palavra-passe"
+msgstr "Confirm password"
+
+#: forms.py:19
+msgid "Repete a palavra-passe"
+msgstr "Repeat the password"
+
+#: forms.py:27 templates/sitepizza/finalizar.html:19
+#: templates/sitepizza/perfil.html:32
+msgid "Morada"
+msgstr "Address"
+
+#: forms.py:28 templates/sitepizza/checkout.html:40
+msgid "Ex.: Rua da Rosa n.º 2, 1.º Esq."
+msgstr "e.g. Rua da Rosa 2, 1st floor left"
+
+#: forms.py:29 templates/sitepizza/contactos.html:31
+#: templates/sitepizza/perfil.html:34
+msgid "Telemóvel"
+msgstr "Mobile"
+
+#: forms.py:44
+msgid "Indica um número português com 9 dígitos, por exemplo 912 345 678."
+msgstr "Enter a Portuguese number with 9 digits, for example 912 345 678."
+
+#: templates/sitepizza/_idioma.html:11
+msgid "Idioma"
+msgstr "Language"
+
+#: templates/sitepizza/_mapa.html:16
+msgid ""
+"Mapa de Oeiras com a localização da Pizzaria Marquês, junto à Quinta do "
+"Marquês"
+msgstr "Map of Oeiras showing Pizzaria Marquês, next to Quinta do Marquês"
+
+#: templates/sitepizza/_mapa.html:21
+msgid "Mapa interativo com a localização da Pizzaria Marquês"
+msgstr "Interactive map showing Pizzaria Marquês"
+
+#: templates/sitepizza/_mapa.html:22
+msgid "Mapa interativo aberto"
+msgstr "Interactive map open"
+
+#: templates/sitepizza/_mapa.html:24
+msgid "Ver mapa interativo"
+msgstr "View interactive map"
+
+#: templates/sitepizza/_mapa.html:27
+msgid "Como chegar"
+msgstr "Get directions"
+
+#: templates/sitepizza/_produto.html:12
+msgid "Adicionar ao carrinho"
+msgstr "Add to cart"
+
+#: templates/sitepizza/_produto.html:13 templates/sitepizza/menu.html:32
+msgid "Pedir"
+msgstr "Order"
+
+#: templates/sitepizza/_produto.html:13
+#, python-format
+msgid "Adicionar %(nome)s ao carrinho"
+msgstr "Add %(nome)s to cart"
+
+#: templates/sitepizza/_quantidade.html:6 templates/sitepizza/checkout.html:76
+#, python-format
+msgid "Quantidade de %(nome)s"
+msgstr "Quantity of %(nome)s"
+
+#: templates/sitepizza/_quantidade.html:7 templates/sitepizza/checkout.html:77
+msgid "Diminuir quantidade"
+msgstr "Decrease quantity"
+
+#: templates/sitepizza/_quantidade.html:8
+msgid "Quantidade"
+msgstr "Quantity"
+
+#: templates/sitepizza/_quantidade.html:9 templates/sitepizza/checkout.html:79
+msgid "Aumentar quantidade"
+msgstr "Increase quantity"
+
+#: templates/sitepizza/base.html:8
+msgid "Pizzaria Marquês · Pizzas em forno a lenha em Oeiras"
+msgstr "Pizzaria Marquês · Wood-fired pizza in Oeiras"
+
+#: templates/sitepizza/base.html:9
+msgid ""
+"Pizzaria Marquês: pizzas de massa fresca em forno a lenha, em Oeiras desde "
+"2009. Vê o menu, encomenda online e recebe em casa."
+msgstr ""
+"Pizzaria Marquês: fresh-dough pizza from a wood-fired oven, in Oeiras since "
+"2009. See the menu, order online and get it delivered."
+
+#: templates/sitepizza/checkout.html:4
+msgid "Carrinho · Pizzaria Marquês"
+msgstr "Cart · Pizzaria Marquês"
+
+#: templates/sitepizza/checkout.html:12
+msgid "Checkout"
+msgstr "Checkout"
+
+#: templates/sitepizza/checkout.html:18
+msgid "Método de envio"
+msgstr "Delivery method"
+
+#: templates/sitepizza/checkout.html:20
+msgid "Entrega em casa"
+msgstr "Home delivery"
+
+#: templates/sitepizza/checkout.html:21
+msgid "Recolha no restaurante"
+msgstr "Pick up at the restaurant"
+
+#: templates/sitepizza/checkout.html:26
+msgid "Detalhes de entrega"
+msgstr "Delivery details"
+
+#: templates/sitepizza/checkout.html:30
+msgid "Morada registada"
+msgstr "Saved address"
+
+#: templates/sitepizza/checkout.html:32
+msgid "Ainda não tens uma morada registada."
+msgstr "You don't have a saved address yet."
+
+#: templates/sitepizza/checkout.html:36
+msgid "Outra morada"
+msgstr "Another address"
+
+#: templates/sitepizza/checkout.html:39
+msgid "Nova morada"
+msgstr "New address"
+
+#: templates/sitepizza/checkout.html:46
+msgid "Método de pagamento"
+msgstr "Payment method"
+
+#: templates/sitepizza/checkout.html:49
+msgid "Cartão"
+msgstr "Card"
+
+#: templates/sitepizza/checkout.html:59 templates/sitepizza/template.html:27
+#: templates/sitepizza/template.html:38
+msgid "Carrinho"
+msgstr "Cart"
+
+#: templates/sitepizza/checkout.html:69
+#, python-format
+msgid "%(preco)s&nbsp;€ cada"
+msgstr "%(preco)s&nbsp;€ each"
+
+#: templates/sitepizza/checkout.html:82
+msgid "Remover"
+msgstr "Remove"
+
+#: templates/sitepizza/checkout.html:91
+#, python-format
+msgid ""
+"O carrinho está vazio. <a href=\"%(url_menu)s\">Vê o menu</a> e escolhe a "
+"tua pizza."
+msgstr ""
+"Your cart is empty. <a href=\"%(url_menu)s\">See the menu</a> and pick your "
+"pizza."
+
+#: templates/sitepizza/checkout.html:94
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: templates/sitepizza/checkout.html:96
+msgid "Finalizar pedido"
+msgstr "Place order"
+
+#: templates/sitepizza/contactos.html:4
+msgid "Contactos · Pizzaria Marquês"
+msgstr "Contact · Pizzaria Marquês"
+
+#: templates/sitepizza/contactos.html:5
+msgid ""
+"Telefone, telemóvel, email e mapa da Pizzaria Marquês, em Oeiras. Fala "
+"connosco ou vem visitar-nos."
+msgstr ""
+"Phone, mobile, email and map for Pizzaria Marquês in Oeiras. Get in touch or"
+" come and visit."
+
+#: templates/sitepizza/contactos.html:10 templates/sitepizza/template.html:63
+#: templates/sitepizza/template.html:101
+msgid "Contactos"
+msgstr "Contact"
+
+#: templates/sitepizza/contactos.html:12
+msgid "Fala connosco ou vem visitar-nos em Oeiras."
+msgstr "Get in touch, or come and see us in Oeiras."
+
+#: templates/sitepizza/contactos.html:16 templates/sitepizza/template.html:109
+msgid "Fala connosco"
+msgstr "Get in touch"
+
+#: templates/sitepizza/contactos.html:22
+msgid "Telefone"
+msgstr "Phone"
+
+#: templates/sitepizza/contactos.html:49 templates/sitepizza/contactos.html:58
+#: templates/sitepizza/sobrenos.html:63
+msgid "Onde estamos"
+msgstr "Find us"
+
+#: templates/sitepizza/contactos.html:50
+msgid "Oeiras, junto à Quinta do Marquês"
+msgstr "Oeiras, next to Quinta do Marquês"
+
+#: templates/sitepizza/finalizar.html:4
+msgid "Pedido finalizado · Pizzaria Marquês"
+msgstr "Order placed · Pizzaria Marquês"
+
+#: templates/sitepizza/finalizar.html:11
+msgid "Obrigado!"
+msgstr "Thank you!"
+
+#: templates/sitepizza/finalizar.html:12
+#, python-format
+msgid "A tua comida está a caminho, %(nome)s."
+msgstr "Your food is on its way, %(nome)s."
+
+#: templates/sitepizza/finalizar.html:14
+msgid "Detalhes do pedido"
+msgstr "Order details"
+
+#: templates/sitepizza/finalizar.html:16
+msgid "N.º do pedido"
+msgstr "Order no."
+
+#: templates/sitepizza/finalizar.html:17
+msgid "Entrega"
+msgstr "Delivery"
+
+#: templates/sitepizza/finalizar.html:18
+msgid "Pagamento"
+msgstr "Payment"
+
+#: templates/sitepizza/finalizar.html:20
+msgid "Total"
+msgstr "Total"
+
+#: templates/sitepizza/finalizar.html:23
+msgid "Voltar ao menu"
+msgstr "Back to the menu"
+
+#: templates/sitepizza/home.html:17
+msgid "Pizzaria Marquês: pizzas em forno a lenha, em Oeiras"
+msgstr "Pizzaria Marquês: wood-fired pizza in Oeiras"
+
+#: templates/sitepizza/home.html:20
+msgid "carrossel"
+msgstr "carousel"
+
+#: templates/sitepizza/home.html:20
+msgid "Destaques"
+msgstr "Highlights"
+
+#: templates/sitepizza/home.html:22
+msgid "Destaque 1"
+msgstr "Highlight 1"
+
+#: templates/sitepizza/home.html:23
+msgid "Destaque 2"
+msgstr "Highlight 2"
+
+#: templates/sitepizza/home.html:24
+msgid "Destaque 3"
+msgstr "Highlight 3"
+
+#: templates/sitepizza/home.html:29
+msgid ""
+"Pizza acabada de sair do forno: massa fresca, ingredientes de qualidade e "
+"muito queijo"
+msgstr ""
+"Pizza fresh out of the oven: fresh dough, quality ingredients and plenty of "
+"cheese"
+
+#: templates/sitepizza/home.html:32
+msgid "Entradas: asas, nuggets e pão de alho. Junta uma entrada ao teu pedido"
+msgstr ""
+"Starters: wings, nuggets and garlic bread. Add a starter to your order"
+
+#: templates/sitepizza/home.html:35
+msgid "Encomenda online: escolhe, paga e recebe em casa"
+msgstr "Order online: choose, pay and get it delivered"
+
+#: templates/sitepizza/home.html:40
+msgid "Anterior"
+msgstr "Previous"
+
+#: templates/sitepizza/home.html:44
+msgid "Seguinte"
+msgstr "Next"
+
+#: templates/sitepizza/home.html:50
+msgid "Vem conhecer-nos"
+msgstr "Come and visit"
+
+#: templates/sitepizza/home.html:51
+msgid ""
+"Estamos em Oeiras, junto à Quinta do Marquês. Passa cá, ou encomenda e nós "
+"levamos até ti."
+msgstr ""
+"We're in Oeiras, next to Quinta do Marquês. Drop by, or order and we'll "
+"bring it to you."
+
+#: templates/sitepizza/login.html:4 templates/sitepizza/login.html:18
+#: templates/sitepizza/login.html:34 templates/sitepizza/registo.html:24
+msgid "Entrar"
+msgstr "Log in"
+
+#: templates/sitepizza/login.html:37 templates/sitepizza/template.html:32
+msgid "Ainda não tens conta?"
+msgstr "Don't have an account yet?"
+
+#: templates/sitepizza/login.html:37 templates/sitepizza/template.html:37
+msgid "Regista-te"
+msgstr "Sign up"
+
+#: templates/sitepizza/login.html:41
+msgid "← Voltar à página inicial"
+msgstr "← Back to the home page"
+
+#: templates/sitepizza/menu.html:4
+msgid "Menu · Pizzaria Marquês"
+msgstr "Menu · Pizzaria Marquês"
+
+#: templates/sitepizza/menu.html:5
+msgid ""
+"O menu da Pizzaria Marquês: oito pizzas com nome de reis portugueses, "
+"entradas, bebidas e sobremesas. Encomenda online em Oeiras."
+msgstr ""
+"The Pizzaria Marquês menu: eight pizzas named after Portuguese kings, "
+"starters, drinks and desserts. Order online in Oeiras."
+
+#: templates/sitepizza/menu.html:10 templates/sitepizza/template.html:51
+#: templates/sitepizza/template.html:99
+msgid "Menu"
+msgstr "Menu"
+
+#: templates/sitepizza/menu.html:13
+msgid "Pizzas"
+msgstr "Pizzas"
+
+#: templates/sitepizza/menu.html:32
+msgid "Adicionado"
+msgstr "Added"
+
+#: templates/sitepizza/menu.html:41
+msgid "Acompanhamentos"
+msgstr "Sides"
+
+#: templates/sitepizza/menu.html:50
+msgid "Bebidas"
+msgstr "Drinks"
+
+#: templates/sitepizza/menu.html:59
+msgid "Sobremesas"
+msgstr "Desserts"
+
+#: templates/sitepizza/menu.html:74
+msgid "Ver carrinho"
+msgstr "View cart"
+
+#: templates/sitepizza/perfil.html:4
+msgid "Perfil · Pizzaria Marquês"
+msgstr "Profile · Pizzaria Marquês"
+
+#: templates/sitepizza/perfil.html:11 templates/sitepizza/template.html:26
+#: templates/sitepizza/template.html:103
+msgid "Perfil"
+msgstr "Profile"
+
+#: templates/sitepizza/perfil.html:19
+#, python-format
+msgid "Olá, %(nome)s."
+msgstr "Hello, %(nome)s."
+
+#: templates/sitepizza/perfil.html:24
+msgid "Foto de perfil"
+msgstr "Profile photo"
+
+#: templates/sitepizza/perfil.html:24
+msgid "(JPG ou PNG, até 2 MB)"
+msgstr "(JPG or PNG, up to 2 MB)"
+
+#: templates/sitepizza/perfil.html:27
+msgid "Atualizar"
+msgstr "Update"
+
+#: templates/sitepizza/registo.html:4 templates/sitepizza/registo.html:7
+#: templates/sitepizza/registo.html:21
+msgid "Criar conta"
+msgstr "Create account"
+
+#: templates/sitepizza/registo.html:24
+msgid "Já tens conta?"
+msgstr "Already have an account?"
+
+#: templates/sitepizza/sobrenos.html:4
+msgid "Sobre nós · Pizzaria Marquês"
+msgstr "About us · Pizzaria Marquês"
+
+#: templates/sitepizza/sobrenos.html:5
+msgid ""
+"De um emprego de verão em Cascais a um forno a lenha em Oeiras: a história "
+"da Pizzaria Marquês, aberta desde 2009 por dois amigos de infância."
+msgstr ""
+"From a summer job in Cascais to a wood-fired oven in Oeiras: the story of "
+"Pizzaria Marquês, opened in 2009 by two childhood friends."
+
+#: templates/sitepizza/sobrenos.html:10 templates/sitepizza/template.html:60
+#: templates/sitepizza/template.html:100
+msgid "Sobre nós"
+msgstr "About us"
+
+#: templates/sitepizza/sobrenos.html:12
+msgid ""
+"Uma pizzaria de bairro com nome de marquês, pizzas com nome de reis e um "
+"forno a lenha que não arrefece desde 2009."
+msgstr ""
+"A neighbourhood pizzeria named after a marquis, pizzas named after kings, "
+"and a wood-fired oven that hasn't gone cold since 2009."
+
+#: templates/sitepizza/sobrenos.html:15
+msgid "Mãos a esticar uma base de pizza numa bancada de madeira enfarinhada"
+msgstr "Hands stretching a pizza base on a floured wooden counter"
+
+#: templates/sitepizza/sobrenos.html:18
+msgid "Dois miúdos da mesma rua"
+msgstr "Two kids from the same street"
+
+#: templates/sitepizza/sobrenos.html:19
+msgid ""
+"O João Trindade e o Miguel Conceição cresceram na mesma rua de Oeiras. Aos "
+"dezasseis anos arranjaram o primeiro emprego de verão numa pizzaria em "
+"Cascais: o João ao balcão, o Miguel a lavar tabuleiros e a espreitar o forno"
+" sempre que podia."
+msgstr ""
+"João Trindade and Miguel Conceição grew up on the same street in Oeiras. At "
+"sixteen they got their first summer job at a pizzeria in Cascais: João at "
+"the counter, Miguel washing trays and peeking at the oven whenever he could."
+
+#: templates/sitepizza/sobrenos.html:20
+msgid ""
+"No último dia de agosto, sentados no paredão, fizeram uma promessa meio a "
+"brincar: um dia, a pizzaria havia de ser deles."
+msgstr ""
+"On the last day of August, sitting on the seafront wall, they made a half-"
+"joking promise: one day, the pizzeria would be theirs."
+
+#: templates/sitepizza/sobrenos.html:25
+msgid "Mãos com farinha a folhear um caderno de receitas"
+msgstr "Floury hands leafing through a recipe notebook"
+
+#: templates/sitepizza/sobrenos.html:28
+msgid "Um caderno cheio de farinha"
+msgstr "A notebook full of flour"
+
+#: templates/sitepizza/sobrenos.html:29
+msgid ""
+"Enquanto o João acabava o curso de Gestão e fazia contas ao sonho nos fins "
+"de semana, o Miguel passou dois invernos em Nápoles, a trabalhar numa "
+"pizzaria de bairro."
+msgstr ""
+"While João finished his Management degree and ran the numbers on the dream "
+"at weekends, Miguel spent two winters in Naples, working at a neighbourhood "
+"pizzeria."
+
+#: templates/sitepizza/sobrenos.html:30
+msgid ""
+"Voltou com um caderno cheio de notas: horas de fermentação, temperaturas do "
+"forno, a maneira certa de abrir a massa com as mãos e nunca com o rolo. O "
+"caderno ainda hoje está pendurado na cozinha, com mais manchas de molho do "
+"que páginas limpas."
+msgstr ""
+"He came back with a notebook full of notes: proving times, oven "
+"temperatures, the right way to open the dough by hand and never with a "
+"rolling pin. The notebook still hangs in the kitchen today, with more sauce "
+"stains than clean pages."
+
+#: templates/sitepizza/sobrenos.html:35
+msgid "Lenha a arder dentro de um forno de tijolo"
+msgstr "Firewood burning inside a brick oven"
+
+#: templates/sitepizza/sobrenos.html:38
+msgid "Um forno e uma porta aberta"
+msgstr "An oven and an open door"
+
+#: templates/sitepizza/sobrenos.html:39
+msgid ""
+"Em 2009 encontraram uma antiga mercearia a dois passos da Quinta do Marquês."
+" Passaram o verão a partir paredes e a levantar, tijolo a tijolo, um forno a"
+" lenha com um forneiro de Mafra."
+msgstr ""
+"In 2009 they found an old grocery shop a stone’s throw from Quinta do "
+"Marquês. They spent the summer knocking down walls and building a wood-fired"
+" oven, brick by brick, with an oven maker from Mafra."
+
+#: templates/sitepizza/sobrenos.html:40
+msgid ""
+"A 2 de novembro de 2009 abriram as portas, com pizza oferecida a quem "
+"entrasse. Choveu a noite inteira, a fila deu a volta ao quarteirão e, às dez"
+" da noite, já não havia massa. Foi a melhor maneira possível de começar."
+msgstr ""
+"On 2 November 2009 they opened the doors, with free pizza for everyone who "
+"came in. It rained all night, the queue went round the block and, by ten "
+"o’clock, the dough had run out. It was the best possible way to start."
+
+#: templates/sitepizza/sobrenos.html:45
+msgid ""
+"Painel de azulejos azuis e brancos do século XVIII com figuras numa paisagem"
+msgstr ""
+"Eighteenth-century blue and white azulejo tile panel with figures in a "
+"landscape"
+
+#: templates/sitepizza/sobrenos.html:47
+msgid "O nome"
+msgstr "The name"
+
+#: templates/sitepizza/sobrenos.html:48
+msgid "Porquê «Marquês»?"
+msgstr "Why “Marquês”?"
+
+#: templates/sitepizza/sobrenos.html:49
+msgid ""
+"Oeiras tem história com marqueses: Sebastião José de Carvalho e Melo foi "
+"Conde de Oeiras antes de ser Marquês de Pombal, e o palácio dele continua a "
+"ser uma das joias da vila. Para uma casa daqui, pareceu-nos o nome certo."
+msgstr ""
+"Oeiras has a history with marquises: Sebastião José de Carvalho e Melo was "
+"Count of Oeiras before he became Marquis of Pombal, and his palace is still "
+"one of the town’s jewels. For a place from around here, it felt like the "
+"right name."
+
+#: templates/sitepizza/sobrenos.html:50
+msgid ""
+"As pizzas seguiram a mesma ideia e ganharam nomes de reis. A Dom Pedro, com "
+"queijo Catupiry, é uma homenagem ao rei que também foi imperador do Brasil, "
+"e nasceu do pedido de uma vizinha brasileira que ainda cá vem todas as "
+"sextas-feiras."
+msgstr ""
+"The pizzas followed the same idea and were named after kings. The Dom Pedro,"
+" with Catupiry cheese, honours the king who was also emperor of Brazil, and "
+"was born from a request by a Brazilian neighbour who still comes in every "
+"Friday."
+
+#: templates/sitepizza/sobrenos.html:55
+msgid "Pizza numa pá de madeira dentro do forno a lenha"
+msgstr "Pizza on a wooden peel inside the wood-fired oven"
+
+#: templates/sitepizza/sobrenos.html:57
+msgid "Hoje"
+msgstr "Today"
+
+#: templates/sitepizza/sobrenos.html:58
+msgid "O mesmo forno, mais mesas"
+msgstr "The same oven, more tables"
+
+#: templates/sitepizza/sobrenos.html:59
+msgid ""
+"A massa continua a ser feita todos os dias e descansa 48 horas antes de ir "
+"ao forno. A equipa cresceu, os clientes da primeira noite trazem agora os "
+"filhos e, desde 2021, também se pode encomendar online."
+msgstr ""
+"The dough is still made every day and rests for 48 hours before it goes in "
+"the oven. The team has grown, the customers from that first night now bring "
+"their children and, since 2021, you can also order online."
+
+#: templates/sitepizza/sobrenos.html:60
+msgid "O forno, esse, é o mesmo. Vem prová-lo."
+msgstr "The oven is still the same one. Come and taste it."
+
+#: templates/sitepizza/sobrenos.html:62
+msgid "Ver o menu"
+msgstr "See the menu"
+
+#: templates/sitepizza/sobrenos.html:68
+msgid "A Pizzaria Marquês em números"
+msgstr "Pizzaria Marquês in numbers"
+
+#: templates/sitepizza/sobrenos.html:69
+msgid "abrimos portas em Oeiras"
+msgstr "we opened our doors in Oeiras"
+
+#: templates/sitepizza/sobrenos.html:70
+msgid "de fermentação da massa"
+msgstr "of dough proving"
+
+#: templates/sitepizza/sobrenos.html:71
+msgid "no forno a lenha"
+msgstr "in the wood-fired oven"
+
+#: templates/sitepizza/sobrenos.html:72
+msgid "pizzas com nome de rei"
+msgstr "pizzas named after kings"
+
+#: templates/sitepizza/template.html:5
+msgid "Saltar para o conteúdo"
+msgstr "Skip to content"
+
+#: templates/sitepizza/template.html:10
+msgid "A melhor pizza de Lisboa"
+msgstr "The best pizza in Lisbon"
+
+#: templates/sitepizza/template.html:14
+msgid "Conta"
+msgstr "Account"
+
+#: templates/sitepizza/template.html:22
+#, python-format
+msgid "Bem-vindo, <strong>%(nome)s</strong>!"
+msgstr "Welcome, <strong>%(nome)s</strong>!"
+
+#: templates/sitepizza/template.html:28
+msgid "Sair"
+msgstr "Log out"
+
+#: templates/sitepizza/template.html:36
+msgid "Login"
+msgstr "Log in"
+
+#: templates/sitepizza/template.html:45
+msgid "Navegação principal"
+msgstr "Main navigation"
+
+#: templates/sitepizza/template.html:46
+msgid "Abrir navegação"
+msgstr "Open navigation"
+
+#: templates/sitepizza/template.html:57 templates/sitepizza/template.html:98
+msgctxt "navegação"
+msgid "Home"
+msgstr "Home"
+
+#: templates/sitepizza/template.html:75
+msgid "Fechar"
+msgstr "Close"
+
+#: templates/sitepizza/template.html:88
+msgid "Logótipo da Pizzaria Marquês"
+msgstr "Pizzaria Marquês logo"
+
+#: templates/sitepizza/template.html:91
+msgid "A melhor pizza de Lisboa, em Oeiras desde 2009."
+msgstr "The best pizza in Lisbon, in Oeiras since 2009."
+
+#: templates/sitepizza/template.html:96
+msgid "Navegar"
+msgstr "Browse"
+
+#: templates/sitepizza/template.html:113
+msgid "Todos os contactos e mapa →"
+msgstr "All contact details and map →"
+
+#: views.py:60
+msgid "Adicione Produtos ao carrinho."
+msgstr "Add some products to your cart."
+
+#: views.py:71 views.py:79 views.py:87
+msgid "Preencha os campos todos para finalizar."
+msgstr "Fill in all the fields to place your order."
+
+#: views.py:82
+#, python-format
+msgid "A morada pode ter até %(max)s caracteres."
+msgstr "The address can be up to %(max)s characters long."
+
+#: views.py:93
+msgid ""
+"O pedido ultrapassa o valor máximo. Retira alguns produtos ou fala connosco."
+msgstr ""
+"The order is over the maximum amount. Remove some products or get in touch "
+"with us."
+
+#: views.py:151
+msgid "Inicia sessão para adicionar produtos ao carrinho."
+msgstr "Log in to add products to your cart."
+
+#: views.py:159 views.py:212
+msgid "Quantidade inválida."
+msgstr "Invalid quantity."
+
+#: views.py:179
+#, python-format
+msgid "Podes ter até %(max)s × %(nome)s no carrinho (já tens %(tens)s)."
+msgstr ""
+"You can have up to %(max)s × %(nome)s in your cart (you have %(tens)s)."
+
+#: views.py:186
+#, python-format
+msgid "Adicionado ao carrinho: %(qtd)s × %(nome)s"
+msgstr "Added to your cart: %(qtd)s × %(nome)s"
+
+#: views.py:212
+#| msgid "Adicione Produtos ao carrinho."
+msgid "Este produto já não está no carrinho."
+msgstr "This product is no longer in your cart."
+
+#: views.py:234
+#, python-format
+#| msgid "Adicionado ao carrinho: %(qtd)s × %(nome)s"
+msgid "Removido do carrinho: %(nome)s"
+msgstr "Removed from your cart: %(nome)s"
+
+#: views.py:236
+#, python-format
+#| msgid "Quantidade de %(nome)s"
+msgid "Quantidade de %(nome)s: %(qtd)s"
+msgstr "Quantity of %(nome)s: %(qtd)s"
+
+#: views.py:276
+#, python-format
+msgid "A conta foi criada para %(nome)s"
+msgstr "Account created for %(nome)s"
+
+#: views.py:298
+msgid "Username ou Password Incorreta!"
+msgstr "Incorrect username or password."
+
+#: views.py:337
+msgid "Envia uma foto JPG ou PNG até 2 MB."
+msgstr "Upload a JPG or PNG photo of up to 2 MB."
+
+#: views.py:341
+msgid "Imagem atualizada."
+msgstr "Photo updated."

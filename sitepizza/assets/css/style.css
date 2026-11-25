@@ -215,6 +215,7 @@ a:hover {
 
 .cartao-conta-topo {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
 }
@@ -235,6 +236,99 @@ a:hover {
 .cartao-conta .botao {
   flex: 1 1 0;
   white-space: nowrap;
+}
+
+/* Language switch (PT / EN): a two-button segmented control in the account card's top row,
+   and on its own in the top corner of the login / registration pages. */
+.idioma {
+  margin: 0 0 0 auto;           /* right edge of its row, also when it wraps under a long name */
+  flex: none;
+}
+
+.idioma-opcoes {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.idioma-icone {
+  color: var(--vermelho);
+  font-size: 1.05rem;
+}
+
+.idioma-opcao {
+  min-width: 2.6rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.6rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--vermelho);
+  color: var(--vermelho);       /* 7:1 on the parchment */
+  font-family: var(--f-texto);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.idioma-opcao:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.idioma-opcao + .idioma-opcao {
+  margin-left: calc(-0.4rem - 1px);   /* join the two buttons, sharing one border */
+  border-radius: 0 4px 4px 0;
+}
+
+.idioma-opcao:hover {
+  background-color: rgba(139, 0, 0, 0.12);
+}
+
+.idioma-opcao[aria-pressed="true"] {
+  background-color: var(--vermelho);
+  color: #fff;
+  cursor: default;
+}
+
+.idioma-opcao:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid var(--vermelho);
+  outline-offset: 2px;
+}
+
+/* Login / registration: on the stone wall, top right; in the flow on phones so it never covers the logo. */
+.idioma-solto {
+  align-self: flex-end;
+}
+
+.idioma-solto .idioma-icone {
+  color: var(--creme);
+  filter: drop-shadow(0 1px 3px #000);
+}
+
+.idioma-solto .idioma-opcao {
+  background-color: var(--creme-claro);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.idioma-solto .idioma-opcao[aria-pressed="true"] {
+  background-color: var(--vermelho);
+}
+
+@media (min-width: 576px) {
+  .pagina-conta .conta {
+    position: relative;
+  }
+
+  .idioma-solto {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+  }
 }
 
 /*------------------------------------------------------------------ Navbar */
@@ -438,6 +532,126 @@ a:hover {
   padding: 0;
 }
 
+/* Add-to-cart button: "Pedir" / "+" and the "Adicionado" / check that replaces it for 2 s.
+   Both states share one grid cell, so the button keeps the width of the wider one (no shift). */
+.botao-adicionar {
+  display: inline-grid;
+}
+
+.botao-estado {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.botao-estado-feito,
+.botao-adicionar.feito .botao-estado {
+  visibility: hidden;
+}
+
+.botao-adicionar.feito .botao-estado-feito {
+  visibility: visible;
+}
+
+.botao-adicionar[aria-busy="true"] {
+  cursor: progress;
+  opacity: 0.8;
+}
+
+/* Items in the cart, on the header's Carrinho button. */
+.contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  margin-left: 0.1rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: var(--creme-claro);
+  color: var(--vermelho);       /* 9:1 */
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.contador[hidden] {
+  display: none;
+}
+
+.contador-novo {
+  animation: contador-novo 0.4s ease-out;
+}
+
+@keyframes contador-novo {
+  40% {
+    transform: scale(1.35);
+  }
+}
+
+/* Add-to-cart notice: bottom of the screen, over the menu, with a link to the cart. */
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 20;
+  width: min(30rem, calc(100% - 2rem));
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem 0.7rem 1rem;
+  background: #212529;
+  border-left: 4px solid var(--creme);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  color: #fff;
+  transform: translateX(-50%);
+  animation: aviso-entrar 0.2s ease-out;
+}
+
+.aviso[hidden] {
+  display: none;
+}
+
+.aviso-icone {
+  color: var(--creme);
+  font-size: 1.1rem;
+}
+
+.aviso-texto {
+  flex: 1;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.aviso-acao {
+  flex: none;
+  white-space: nowrap;
+}
+
+@keyframes aviso-entrar {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contador-novo,
+  .aviso {
+    animation: none;
+  }
+}
+
+/* Coming back to a product (#produto-12, after adding without JS or after logging in): a little air above it. */
+.pizza,
+.produto {
+  scroll-margin-top: 1rem;
+}
+
 /*------------------------------------------------------------------ Parchment card + seal */
 
 .divisao {
@@ -636,29 +850,136 @@ h1.caminho {
 }
 
 .form-pedido {
+  container: pedido / inline-size;   /* the layout below follows the room this form has, not the screen */
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
-.form-pedido-qtd {
+/* Quantity stepper: − [n] +, one control in the parchment/red style of the fields. */
+.qtd {
   display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 600;
-}
-
-.form-pedido-qtd input {
-  width: 4rem;
   height: 2.5rem;
-  padding: 0 0.25rem;
-  text-align: center;
-  font: inherit;
-  color: var(--tinta);
   background: #fffaf0;
   border: 1px solid rgba(139, 0, 0, 0.45);
   border-radius: 4px;
+}
+
+.qtd-botao {
+  flex: none;
+  width: 2.5rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 3px;
+  color: var(--vermelho);
+  font-size: 0.9rem;
+  cursor: pointer;
+  touch-action: manipulation;        /* no double-tap zoom when tapping + quickly */
+  transition: background-color 0.15s;
+}
+
+.qtd-botao:hover {
+  background: rgba(139, 0, 0, 0.1);
+}
+
+.qtd-botao:active {
+  background: rgba(139, 0, 0, 0.2);
+}
+
+.qtd-botao:disabled,
+.qtd-botao[aria-disabled="true"] {
+  color: rgba(139, 0, 0, 0.3);
+  background: transparent;
+  cursor: default;
+}
+
+.qtd-botao:focus-visible,
+.qtd-valor:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid var(--vermelho);
+  outline-offset: 1px;
+}
+
+.qtd-valor {
+  width: 2.25rem;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-inline: 1px solid rgba(139, 0, 0, 0.2);
+  color: var(--tinta);
+  font: 700 1rem / 1 var(--f-texto);   /* 16px: no zoom on iPhone when typing */
+  text-align: center;
+  font-variant-numeric: tabular-nums; /* 9 -> 10 doesn't wobble */
+}
+
+/* The buttons need JS; without it the number field (with its native arrows) does the job alone. */
+html:not(.js) .qtd-botao[data-qtd-passo] {   /* the menu's; the cart's are submit buttons and work without JS */
+  display: none;
+}
+
+.js .qtd-valor {
+  appearance: textfield;
+}
+
+.js .qtd-valor::-webkit-inner-spin-button,
+.js .qtd-valor::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* Small cards (sides, drinks, desserts): an icon button next to the stepper... */
+.form-pedido-compacto .botao-adicionar {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+
+.botao-rotulo {
+  display: none;
+}
+
+/* ...and when they're too narrow for both (phones, tablets), stepper and "Pedir" one above the
+   other, full width: bigger targets where space is tight. Pizzas do the same below 16rem. */
+@container pedido (max-width: 10.25rem) {
+  .form-pedido-compacto > * {
+    flex: 1 1 100%;
+  }
+
+  .form-pedido-compacto .botao-adicionar {
+    width: auto;
+    padding: 0 0.5rem;
+  }
+
+  .form-pedido-compacto .botao-rotulo {
+    display: inline;
+  }
+}
+
+@container pedido (max-width: 16rem) {
+  .form-pedido:not(.form-pedido-compacto) > * {
+    flex: 1 1 100%;
+  }
+}
+
+.qtd {
+  min-width: 0;                       /* may shrink to the card (320px phones: 116px for 2 x 40px + the number) */
+}
+
+.qtd span.qtd-valor {               /* the cart shows the number (changed with − / +) */
+  display: grid;
+  place-items: center;
+}
+
+.qtd .qtd-valor {
+  flex: 1 1 2.25rem;
+  width: auto;
+  min-width: 1.75rem;
 }
 
 .grelha-produtos {
@@ -756,8 +1077,8 @@ h1.caminho {
   grid-template-columns: 72px minmax(0, 1fr) auto;
   grid-template-areas:
     "foto info preco"
-    "foto info remover";
-  gap: 0.25rem 1rem;
+    "foto acoes acoes";
+  gap: 0.6rem 1rem;
   align-items: center;
   padding: 1rem 0;
   border-bottom: 3px dotted var(--vermelho);
@@ -785,9 +1106,10 @@ h1.caminho {
   margin: 0;
 }
 
-.item-carrinho-qtd {
+.item-carrinho-unitario {
   margin: 0;
   color: var(--tinta-suave);
+  font-size: 0.925rem;
 }
 
 .item-carrinho-preco {
@@ -797,9 +1119,31 @@ h1.caminho {
   text-align: right;
 }
 
-.item-carrinho form {
-  grid-area: remover;
-  justify-self: end;
+/* − n + on the left, Remover on the right: the destructive action away from the stepper. */
+.item-carrinho-acoes {
+  grid-area: acoes;
+  container: carrinho / inline-size;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.botao-remover {
+  height: 2.5rem;
+  padding: 0 0.8rem;
+}
+
+/* Narrow (phones): Remover keeps its icon only; the name stays for screen readers. */
+@container carrinho (max-width: 14rem) {
+  .botao-remover {
+    width: 2.5rem;
+    padding: 0;
+  }
+
+  .botao-remover-texto {
+    display: none;
+  }
 }
 
 .carrinho-total {
@@ -1276,18 +1620,6 @@ a.contacto:focus-visible {
 
   .mapa-moldura {
     aspect-ratio: 4 / 3;
-  }
-
-  .form-pedido-qtd input {
-    width: 3.25rem;
-  }
-
-  .form-pedido-qtd span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
   }
 
   .item-carrinho {

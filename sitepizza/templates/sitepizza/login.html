@@ -1,11 +1,13 @@
 {% extends "sitepizza/base.html" %}
-{% load static icones %}
+{% load static i18n icones %}
 
-{% block titulo %}{% block titulo_conta %}Entrar{% endblock %} · Pizzaria Marquês{% endblock %}
+{% block titulo %}{% block titulo_conta %}{% trans "Entrar" %}{% endblock %} · Pizzaria Marquês{% endblock %}
 {% block classe_body %}pagina-conta{% endblock %}
 
 {% block corpo %}
 <main class="conta" id="conteudo">
+    {% include "sitepizza/_idioma.html" with classe="idioma-solto" %}
+
     <a class="conta-marca" href="{% url 'navegar:home' %}">
         <img src="{% static 'img/logo/80.webp' %}" srcset="{% static 'img/logo/80.webp' %} 1x, {% static 'img/logo/160.webp' %} 2x" alt="" width="64" height="64">
         <span>Pizzaria <span class="marca-destaque">Marquês</span></span>
@@ -13,7 +15,7 @@
 
     <div class="divisao conta-cartao">
         {% block formulario %}
-        <h1 class="conta-titulo">Entrar</h1>
+        <h1 class="conta-titulo">{% trans "Entrar" %}</h1>
 
         {% for message in messages %}
         <p class="alert alert-{{ message.tags }}" role="alert">{{ message }}</p>
@@ -22,20 +24,20 @@
         <form method="post" action="">
             {% csrf_token %}
             <div class="campo">
-                <label class="campo-rotulo" for="username">{% icone "user" %} Nome de utilizador</label>
+                <label class="campo-rotulo" for="username">{% icone "user" %} {% trans "Nome de utilizador" %}</label>
                 <input class="form-control" type="text" id="username" name="username" autocomplete="username" required autofocus>
             </div>
             <div class="campo">
-                <label class="campo-rotulo" for="password">{% icone "key" %} Palavra-passe</label>
+                <label class="campo-rotulo" for="password">{% icone "key" %} {% trans "Palavra-passe" %}</label>
                 <input class="form-control" type="password" id="password" name="password" autocomplete="current-password" required>
             </div>
-            <button class="botao botao-grande botao-bloco" type="submit">{% icone "sign-in-alt" %} Entrar</button>
+            <button class="botao botao-grande botao-bloco" type="submit">{% icone "sign-in-alt" %} {% trans "Entrar" %}</button>
         </form>
 
-        <p class="conta-alternativa">Ainda não tens conta? <a href="{% url 'navegar:registo' %}">Regista-te</a></p>
+        <p class="conta-alternativa">{% trans "Ainda não tens conta?" %} <a href="{% url 'navegar:registo' %}">{% trans "Regista-te" %}</a></p>
         {% endblock %}
     </div>
 
-    <a class="conta-voltar" href="{% url 'navegar:home' %}">← Voltar à página inicial</a>
+    <a class="conta-voltar" href="{% url 'navegar:home' %}">{% trans "← Voltar à página inicial" %}</a>
 </main>
 {% endblock %}

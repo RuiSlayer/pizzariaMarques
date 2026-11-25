@@ -1,73 +1,54 @@
 {% extends "sitepizza/template.html" %}
-{% load static %}
+{% load static i18n traducoes %}
 
 {% block preload %}
+{% sufixo_idioma as sufixo %}
 {# The first banner is the LCP element: let the browser fetch it before it parses the carousel. #}
 <link rel="preload" as="image" type="image/avif" media="(min-width: 992px)" imagesizes="85vw"
-      imagesrcset="{% static 'img/banners/forno-largo/1260.avif' %} 1260w, {% static 'img/banners/forno-largo/1890.avif' %} 1890w, {% static 'img/banners/forno-largo/2520.avif' %} 2520w">
+      imagesrcset="{% static 'img/banners/forno-largo'|add:sufixo|add:'/1260.avif' %} 1260w, {% static 'img/banners/forno-largo'|add:sufixo|add:'/1890.avif' %} 1890w, {% static 'img/banners/forno-largo'|add:sufixo|add:'/2520.avif' %} 2520w">
 <link rel="preload" as="image" type="image/avif" media="(max-width: 991.98px)" imagesizes="(max-width: 575.98px) calc(100vw - 24px), 85vw"
-      imagesrcset="{% static 'img/banners/forno/480.avif' %} 480w, {% static 'img/banners/forno/630.avif' %} 630w, {% static 'img/banners/forno/720.avif' %} 720w, {% static 'img/banners/forno/945.avif' %} 945w, {% static 'img/banners/forno/1260.avif' %} 1260w">
+      imagesrcset="{% static 'img/banners/forno'|add:sufixo|add:'/480.avif' %} 480w, {% static 'img/banners/forno'|add:sufixo|add:'/630.avif' %} 630w, {% static 'img/banners/forno'|add:sufixo|add:'/720.avif' %} 720w, {% static 'img/banners/forno'|add:sufixo|add:'/945.avif' %} 945w, {% static 'img/banners/forno'|add:sufixo|add:'/1260.avif' %} 1260w">
 {% endblock %}
 
 {% block classe_main %}conteudo conteudo-home{% endblock %}
 
 {% block static %}
 <div class="container">
-    <h1 class="visually-hidden">Pizzaria Marquês: pizzas em forno a lenha, em Oeiras</h1>
+    <h1 class="visually-hidden">{% trans "Pizzaria Marquês: pizzas em forno a lenha, em Oeiras" %}</h1>
 
     <div class="hero">
-        <div id="destaques" class="carousel slide imagens-menu" data-autoplay aria-roledescription="carrossel" aria-label="Destaques">
+        <div id="destaques" class="carousel slide imagens-menu" data-autoplay aria-roledescription="{% trans 'carrossel' %}" aria-label="{% trans 'Destaques' %}">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#destaques" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Destaque 1"></button>
-                <button type="button" data-bs-target="#destaques" data-bs-slide-to="1" aria-label="Destaque 2"></button>
-                <button type="button" data-bs-target="#destaques" data-bs-slide-to="2" aria-label="Destaque 3"></button>
+                <button type="button" data-bs-target="#destaques" data-bs-slide-to="0" class="active" aria-current="true" aria-label="{% trans 'Destaque 1' %}"></button>
+                <button type="button" data-bs-target="#destaques" data-bs-slide-to="1" aria-label="{% trans 'Destaque 2' %}"></button>
+                <button type="button" data-bs-target="#destaques" data-bs-slide-to="2" aria-label="{% trans 'Destaque 3' %}"></button>
             </div>
+            {% sufixo_idioma as sufixo %}
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <picture>
-                        <source media="(min-width: 992px)" type="image/avif" sizes="85vw" srcset="{% static 'img/banners/forno-largo/1260.avif' %} 1260w, {% static 'img/banners/forno-largo/1890.avif' %} 1890w, {% static 'img/banners/forno-largo/2520.avif' %} 2520w" width="2520" height="1050">
-                        <source media="(min-width: 992px)" type="image/webp" sizes="85vw" srcset="{% static 'img/banners/forno-largo/1260.webp' %} 1260w, {% static 'img/banners/forno-largo/1890.webp' %} 1890w, {% static 'img/banners/forno-largo/2520.webp' %} 2520w" width="2520" height="1050">
-                        <source media="(min-width: 992px)" sizes="85vw" srcset="{% static 'img/banners/forno-largo/1260.jpg' %} 1260w, {% static 'img/banners/forno-largo/1890.jpg' %} 1890w, {% static 'img/banners/forno-largo/2520.jpg' %} 2520w" width="2520" height="1050">
-                        <source type="image/avif" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/forno/480.avif' %} 480w, {% static 'img/banners/forno/630.avif' %} 630w, {% static 'img/banners/forno/720.avif' %} 720w, {% static 'img/banners/forno/945.avif' %} 945w, {% static 'img/banners/forno/1260.avif' %} 1260w">
-                        <source type="image/webp" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/forno/480.webp' %} 480w, {% static 'img/banners/forno/630.webp' %} 630w, {% static 'img/banners/forno/720.webp' %} 720w, {% static 'img/banners/forno/945.webp' %} 945w, {% static 'img/banners/forno/1260.webp' %} 1260w">
-                        <img src="{% static 'img/banners/forno/630.jpg' %}" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/forno/480.jpg' %} 480w, {% static 'img/banners/forno/630.jpg' %} 630w, {% static 'img/banners/forno/720.jpg' %} 720w, {% static 'img/banners/forno/945.jpg' %} 945w, {% static 'img/banners/forno/1260.jpg' %} 1260w" width="1260" height="850" class="d-block w-100" alt="Pizza acabada de sair do forno: massa fresca, ingredientes de qualidade e muito queijo" fetchpriority="high">
-                    </picture>
+                    {% include "sitepizza/_banner.html" with sufixo=sufixo nome="forno" alt=_("Pizza acabada de sair do forno: massa fresca, ingredientes de qualidade e muito queijo") primeiro=True %}
                 </div>
                 <div class="carousel-item">
-                    <picture>
-                        <source media="(min-width: 992px)" type="image/avif" sizes="85vw" srcset="{% static 'img/banners/entradas-largo/1260.avif' %} 1260w, {% static 'img/banners/entradas-largo/1890.avif' %} 1890w, {% static 'img/banners/entradas-largo/2520.avif' %} 2520w" width="2520" height="1050">
-                        <source media="(min-width: 992px)" type="image/webp" sizes="85vw" srcset="{% static 'img/banners/entradas-largo/1260.webp' %} 1260w, {% static 'img/banners/entradas-largo/1890.webp' %} 1890w, {% static 'img/banners/entradas-largo/2520.webp' %} 2520w" width="2520" height="1050">
-                        <source media="(min-width: 992px)" sizes="85vw" srcset="{% static 'img/banners/entradas-largo/1260.jpg' %} 1260w, {% static 'img/banners/entradas-largo/1890.jpg' %} 1890w, {% static 'img/banners/entradas-largo/2520.jpg' %} 2520w" width="2520" height="1050">
-                        <source type="image/avif" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/entradas/480.avif' %} 480w, {% static 'img/banners/entradas/630.avif' %} 630w, {% static 'img/banners/entradas/720.avif' %} 720w, {% static 'img/banners/entradas/945.avif' %} 945w, {% static 'img/banners/entradas/1260.avif' %} 1260w">
-                        <source type="image/webp" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/entradas/480.webp' %} 480w, {% static 'img/banners/entradas/630.webp' %} 630w, {% static 'img/banners/entradas/720.webp' %} 720w, {% static 'img/banners/entradas/945.webp' %} 945w, {% static 'img/banners/entradas/1260.webp' %} 1260w">
-                        <img src="{% static 'img/banners/entradas/630.jpg' %}" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/entradas/480.jpg' %} 480w, {% static 'img/banners/entradas/630.jpg' %} 630w, {% static 'img/banners/entradas/720.jpg' %} 720w, {% static 'img/banners/entradas/945.jpg' %} 945w, {% static 'img/banners/entradas/1260.jpg' %} 1260w" width="1260" height="850" class="d-block w-100" alt="Entradas: asas, nuggets e pão de alho. Junta uma entrada ao teu pedido" loading="lazy">
-                    </picture>
+                    {% include "sitepizza/_banner.html" with sufixo=sufixo nome="entradas" alt=_("Entradas: asas, nuggets e pão de alho. Junta uma entrada ao teu pedido") %}
                 </div>
                 <div class="carousel-item">
-                    <picture>
-                        <source media="(min-width: 992px)" type="image/avif" sizes="85vw" srcset="{% static 'img/banners/online-largo/1260.avif' %} 1260w, {% static 'img/banners/online-largo/1890.avif' %} 1890w, {% static 'img/banners/online-largo/2520.avif' %} 2520w" width="2520" height="1050">
-                        <source media="(min-width: 992px)" type="image/webp" sizes="85vw" srcset="{% static 'img/banners/online-largo/1260.webp' %} 1260w, {% static 'img/banners/online-largo/1890.webp' %} 1890w, {% static 'img/banners/online-largo/2520.webp' %} 2520w" width="2520" height="1050">
-                        <source media="(min-width: 992px)" sizes="85vw" srcset="{% static 'img/banners/online-largo/1260.jpg' %} 1260w, {% static 'img/banners/online-largo/1890.jpg' %} 1890w, {% static 'img/banners/online-largo/2520.jpg' %} 2520w" width="2520" height="1050">
-                        <source type="image/avif" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/online/480.avif' %} 480w, {% static 'img/banners/online/630.avif' %} 630w, {% static 'img/banners/online/720.avif' %} 720w, {% static 'img/banners/online/945.avif' %} 945w, {% static 'img/banners/online/1260.avif' %} 1260w">
-                        <source type="image/webp" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/online/480.webp' %} 480w, {% static 'img/banners/online/630.webp' %} 630w, {% static 'img/banners/online/720.webp' %} 720w, {% static 'img/banners/online/945.webp' %} 945w, {% static 'img/banners/online/1260.webp' %} 1260w">
-                        <img src="{% static 'img/banners/online/630.jpg' %}" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static 'img/banners/online/480.jpg' %} 480w, {% static 'img/banners/online/630.jpg' %} 630w, {% static 'img/banners/online/720.jpg' %} 720w, {% static 'img/banners/online/945.jpg' %} 945w, {% static 'img/banners/online/1260.jpg' %} 1260w" width="1260" height="850" class="d-block w-100" alt="Encomenda online: escolhe, paga e recebe em casa" loading="lazy">
-                    </picture>
+                    {% include "sitepizza/_banner.html" with sufixo=sufixo nome="online" alt=_("Encomenda online: escolhe, paga e recebe em casa") %}
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#destaques" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
+                <span class="visually-hidden">{% trans "Anterior" %}</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#destaques" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Seguinte</span>
+                <span class="visually-hidden">{% trans "Seguinte" %}</span>
             </button>
         </div>
     </div>
 
     <section class="divisao seccao-visita" aria-labelledby="titulo-visita">
-        <h2 id="titulo-visita" class="titulo-seccao">Vem conhecer-nos</h2>
-        <p class="texto-intro">Estamos em Oeiras, junto à Quinta do Marquês. Passa cá, ou encomenda e nós levamos até ti.</p>
+        <h2 id="titulo-visita" class="titulo-seccao">{% trans "Vem conhecer-nos" %}</h2>
+        <p class="texto-intro">{% trans "Estamos em Oeiras, junto à Quinta do Marquês. Passa cá, ou encomenda e nós levamos até ti." %}</p>
         {% include "sitepizza/_mapa.html" with sizes="(max-width: 575.98px) calc(100vw - 72px), calc(85vw - 144px)" %}
     </section>
 </div>

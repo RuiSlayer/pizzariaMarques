@@ -1,17 +1,17 @@
 {% extends "sitepizza/base.html" %}
-{% load static imagens icones %}
+{% load static i18n imagens icones %}
 
 {% block corpo %}
-<a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
+<a class="saltar" href="#conteudo">{% trans "Saltar para o conteúdo" %}</a>
 
 <header id="cabecalho">
     <div class="marca">
         <a class="marca-nome" href="{% url 'navegar:home' %}">Pizzaria <span class="marca-destaque">Marquês</span></a>
-        <p class="marca-slogan">A melhor pizza de Lisboa</p>
+        <p class="marca-slogan">{% trans "A melhor pizza de Lisboa" %}</p>
     </div>
 
     {# Conta + carrinho #}
-    <section class="cartao-conta" aria-label="Conta">
+    <section class="cartao-conta" aria-label="{% trans 'Conta' %}">
         {% if user.is_authenticated %}
         <div class="cartao-conta-topo">
             {% if user.perfil.image %}
@@ -19,46 +19,48 @@
             {% else %}
             <img class="cartao-conta-avatar" src="{% static 'img/avatar/40.webp' %}" srcset="{% static 'img/avatar/40.webp' %} 1x, {% static 'img/avatar/80.webp' %} 2x" alt="" width="40" height="40">
             {% endif %}
-            <span>Bem-vindo, <strong>{{ user.username }}</strong>!</span>
+            <span>{% blocktrans with nome=user.username %}Bem-vindo, <strong>{{ nome }}</strong>!{% endblocktrans %}</span>
+            {% include "sitepizza/_idioma.html" %}
         </div>
         <div class="cartao-conta-acoes">
-            <a class="botao" href="{% url 'navegar:perfil' user.id %}">{% icone "user" %} Perfil</a>
-            <a class="botao" href="{% url 'navegar:checkout' %}">{% icone "shopping-cart" %} Carrinho</a>
-            <a class="botao" href="{% url 'navegar:logout' %}">{% icone "power-off" %} Sair</a>
+            <a class="botao" href="{% url 'navegar:perfil' user.id %}">{% icone "user" %} {% trans "Perfil" %}</a>
+            <a class="botao" href="{% url 'navegar:checkout' %}">{% icone "shopping-cart" %} {% trans "Carrinho" %}<span class="contador" data-carrinho-total{% if not carrinho_total %} hidden{% endif %}>{{ carrinho_total }}</span></a>
+            <a class="botao" href="{% url 'navegar:logout' %}">{% icone "power-off" %} {% trans "Sair" %}</a>
         </div>
         {% else %}
         <div class="cartao-conta-topo">
-            <span>Ainda não tens conta?</span>
+            <span>{% trans "Ainda não tens conta?" %}</span>
+            {% include "sitepizza/_idioma.html" %}
         </div>
         <div class="cartao-conta-acoes">
-            <a class="botao" href="{% url 'navegar:login' %}">{% icone "sign-in-alt" %} Login</a>
-            <a class="botao" href="{% url 'navegar:registo' %}">{% icone "user-plus" %} Regista-te</a>
-            <a class="botao" href="{% url 'navegar:checkout' %}">{% icone "shopping-cart" %} Carrinho</a>
+            <a class="botao" href="{% url 'navegar:login' %}">{% icone "sign-in-alt" %} {% trans "Login" %}</a>
+            <a class="botao" href="{% url 'navegar:registo' %}">{% icone "user-plus" %} {% trans "Regista-te" %}</a>
+            <a class="botao" href="{% url 'navegar:checkout' %}">{% icone "shopping-cart" %} {% trans "Carrinho" %}</a>
         </div>
         {% endif %}
     </section>
 </header>
 
 {% with pagina=request.resolver_match.url_name %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navegação principal">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavBar" aria-controls="topNavBar" aria-expanded="false" aria-label="Abrir navegação">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="{% trans 'Navegação principal' %}">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavBar" aria-controls="topNavBar" aria-expanded="false" aria-label="{% trans 'Abrir navegação' %}">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <a class="botao-menu{% if pagina == 'menu' %} ativo{% endif %}" href="{% url 'navegar:menu' %}"{% if pagina == 'menu' %} aria-current="page"{% endif %}>
-        {% icone "utensils" %} Menu
+        {% icone "utensils" %} {% trans "Menu" %}
     </a>
 
     <div class="collapse navbar-collapse" id="topNavBar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link{% if pagina == 'home' %} active{% endif %}" href="{% url 'navegar:home' %}"{% if pagina == 'home' %} aria-current="page"{% endif %}>Home</a>
+                <a class="nav-link{% if pagina == 'home' %} active{% endif %}" href="{% url 'navegar:home' %}"{% if pagina == 'home' %} aria-current="page"{% endif %}>{% trans "Home" context "navegação" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if pagina == 'sobrenos' %} active{% endif %}" href="{% url 'navegar:sobrenos' %}"{% if pagina == 'sobrenos' %} aria-current="page"{% endif %}>Sobre nós</a>
+                <a class="nav-link{% if pagina == 'sobrenos' %} active{% endif %}" href="{% url 'navegar:sobrenos' %}"{% if pagina == 'sobrenos' %} aria-current="page"{% endif %}>{% trans "Sobre nós" %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{% if pagina == 'contactos' %} active{% endif %}" href="{% url 'navegar:contactos' %}"{% if pagina == 'contactos' %} aria-current="page"{% endif %}>Contactos</a>
+                <a class="nav-link{% if pagina == 'contactos' %} active{% endif %}" href="{% url 'navegar:contactos' %}"{% if pagina == 'contactos' %} aria-current="page"{% endif %}>{% trans "Contactos" %}</a>
             </li>
         </ul>
     </div>
@@ -70,7 +72,7 @@
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Fechar' %}"></button>
     </div>
     {% endfor %}
 </div>
@@ -83,32 +85,32 @@
 <footer class="rodape">
     <div class="container rodape-grelha">
         <div class="rodape-marca">
-            <img src="{% static 'img/logo/80.webp' %}" srcset="{% static 'img/logo/80.webp' %} 1x, {% static 'img/logo/160.webp' %} 2x" alt="Logótipo da Pizzaria Marquês" width="80" height="80" loading="lazy">
+            <img src="{% static 'img/logo/80.webp' %}" srcset="{% static 'img/logo/80.webp' %} 1x, {% static 'img/logo/160.webp' %} 2x" alt="{% trans 'Logótipo da Pizzaria Marquês' %}" width="80" height="80" loading="lazy">
             <div>
                 <p class="rodape-nome">Pizzaria Marquês</p>
-                <p class="rodape-slogan">A melhor pizza de Lisboa, em Oeiras desde 2009.</p>
+                <p class="rodape-slogan">{% trans "A melhor pizza de Lisboa, em Oeiras desde 2009." %}</p>
             </div>
         </div>
 
         <nav class="rodape-coluna" aria-labelledby="rodape-navegar">
-            <h2 class="rodape-titulo" id="rodape-navegar">Navegar</h2>
+            <h2 class="rodape-titulo" id="rodape-navegar">{% trans "Navegar" %}</h2>
             <ul class="rodape-lista">
-                <li><a href="{% url 'navegar:home' %}">Home</a></li>
-                <li><a href="{% url 'navegar:menu' %}">Menu</a></li>
-                <li><a href="{% url 'navegar:sobrenos' %}">Sobre nós</a></li>
-                <li><a href="{% url 'navegar:contactos' %}">Contactos</a></li>
+                <li><a href="{% url 'navegar:home' %}">{% trans "Home" context "navegação" %}</a></li>
+                <li><a href="{% url 'navegar:menu' %}">{% trans "Menu" %}</a></li>
+                <li><a href="{% url 'navegar:sobrenos' %}">{% trans "Sobre nós" %}</a></li>
+                <li><a href="{% url 'navegar:contactos' %}">{% trans "Contactos" %}</a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'navegar:perfil' user.id %}">Perfil</a></li>
+                <li><a href="{% url 'navegar:perfil' user.id %}">{% trans "Perfil" %}</a></li>
                 {% endif %}
             </ul>
         </nav>
 
         <div class="rodape-coluna">
-            <h2 class="rodape-titulo">Fala connosco</h2>
+            <h2 class="rodape-titulo">{% trans "Fala connosco" %}</h2>
             <ul class="rodape-lista">
                 <li><a href="tel:+351218332465">{% icone "phone" %} 218 332 465</a></li>
                 <li><a href="mailto:pizzamarques@gmail.com">{% icone "envelope" %} pizzamarques@gmail.com</a></li>
-                <li><a class="rodape-mais" href="{% url 'navegar:contactos' %}">Todos os contactos e mapa →</a></li>
+                <li><a class="rodape-mais" href="{% url 'navegar:contactos' %}">{% trans "Todos os contactos e mapa →" %}</a></li>
             </ul>
         </div>
     </div>

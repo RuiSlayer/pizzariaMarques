@@ -1,0 +1,16 @@
+{% load static %}
+{% comment %}
+Home carousel banner: wide art from 992px up, the 3:2 crop below. The copy is set in the picture,
+so English pages use the -en folders (made by tools/banners-en.py).
+Params: nome (forno, entradas, online), sufixo ("" or "-en"), alt, primeiro (True for the LCP slide).
+{% endcomment %}
+{% with l='img/banners/'|add:nome|add:'-largo'|add:sufixo|add:'/' p='img/banners/'|add:nome|add:sufixo|add:'/' %}
+<picture>
+    <source media="(min-width: 992px)" type="image/avif" sizes="85vw" srcset="{% static l|add:'1260.avif' %} 1260w, {% static l|add:'1890.avif' %} 1890w, {% static l|add:'2520.avif' %} 2520w" width="2520" height="1050">
+    <source media="(min-width: 992px)" type="image/webp" sizes="85vw" srcset="{% static l|add:'1260.webp' %} 1260w, {% static l|add:'1890.webp' %} 1890w, {% static l|add:'2520.webp' %} 2520w" width="2520" height="1050">
+    <source media="(min-width: 992px)" sizes="85vw" srcset="{% static l|add:'1260.jpg' %} 1260w, {% static l|add:'1890.jpg' %} 1890w, {% static l|add:'2520.jpg' %} 2520w" width="2520" height="1050">
+    <source type="image/avif" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static p|add:'480.avif' %} 480w, {% static p|add:'630.avif' %} 630w, {% static p|add:'720.avif' %} 720w, {% static p|add:'945.avif' %} 945w, {% static p|add:'1260.avif' %} 1260w">
+    <source type="image/webp" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static p|add:'480.webp' %} 480w, {% static p|add:'630.webp' %} 630w, {% static p|add:'720.webp' %} 720w, {% static p|add:'945.webp' %} 945w, {% static p|add:'1260.webp' %} 1260w">
+    <img src="{% static p|add:'630.jpg' %}" sizes="(max-width: 575.98px) calc(100vw - 24px), 85vw" srcset="{% static p|add:'480.jpg' %} 480w, {% static p|add:'630.jpg' %} 630w, {% static p|add:'720.jpg' %} 720w, {% static p|add:'945.jpg' %} 945w, {% static p|add:'1260.jpg' %} 1260w" width="1260" height="850" class="d-block w-100" alt="{{ alt }}" {% if primeiro %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+</picture>
+{% endwith %}

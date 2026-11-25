@@ -1,25 +1,25 @@
 {% extends "sitepizza/template.html" %}
-{% load icones %}
+{% load i18n icones %}
 
-{% block titulo %}Contactos · Pizzaria Marquês{% endblock %}
-{% block descricao %}Telefone, telemóvel, email e mapa da Pizzaria Marquês, em Oeiras. Fala connosco ou vem visitar-nos.{% endblock %}
+{% block titulo %}{% trans "Contactos · Pizzaria Marquês" %}{% endblock %}
+{% block descricao %}{% trans "Telefone, telemóvel, email e mapa da Pizzaria Marquês, em Oeiras. Fala connosco ou vem visitar-nos." %}{% endblock %}
 
 {% block static %}
 <div class="container">
     <div class="divisao com-selo contactos">
-        {% include "sitepizza/_selo.html" with titulo="Contactos" %}
+        {% include "sitepizza/_selo.html" with titulo=_("Contactos") %}
 
-        <p class="texto-intro">Fala connosco ou vem visitar-nos em Oeiras.</p>
+        <p class="texto-intro">{% trans "Fala connosco ou vem visitar-nos em Oeiras." %}</p>
 
         <div class="row g-4">
             <section class="col-lg-5" aria-labelledby="titulo-fala-connosco">
-                <h2 id="titulo-fala-connosco" class="titulo-seccao">Fala connosco</h2>
+                <h2 id="titulo-fala-connosco" class="titulo-seccao">{% trans "Fala connosco" %}</h2>
                 <ul class="lista-contactos">
                     <li>
                         <a class="contacto" href="tel:+351218332465">
                             <span class="contacto-icone">{% icone "phone" %}</span>
                             <span class="contacto-texto">
-                                <span class="contacto-rotulo">Telefone</span>
+                                <span class="contacto-rotulo">{% trans "Telefone" %}</span>
                                 <span class="contacto-valor">218 332 465</span>
                             </span>
                         </a>
@@ -28,7 +28,7 @@
                         <a class="contacto" href="tel:+351952763524">
                             <span class="contacto-icone">{% icone "mobile-alt" %}</span>
                             <span class="contacto-texto">
-                                <span class="contacto-rotulo">Telemóvel</span>
+                                <span class="contacto-rotulo">{% trans "Telemóvel" %}</span>
                                 <span class="contacto-valor">952 763 524</span>
                             </span>
                         </a>
@@ -37,7 +37,7 @@
                         <a class="contacto" href="mailto:pizzamarques@gmail.com">
                             <span class="contacto-icone">{% icone "envelope" %}</span>
                             <span class="contacto-texto">
-                                <span class="contacto-rotulo">Email</span>
+                                <span class="contacto-rotulo">{% trans "Email" %}</span>
                                 <span class="contacto-valor">pizzamarques@<wbr>gmail.com</span>
                             </span>
                         </a>
@@ -46,8 +46,8 @@
                         <div class="contacto">
                             <span class="contacto-icone">{% icone "map-marker-alt" %}</span>
                             <span class="contacto-texto">
-                                <span class="contacto-rotulo">Onde estamos</span>
-                                <span class="contacto-valor">Oeiras, junto à Quinta do Marquês</span>
+                                <span class="contacto-rotulo">{% trans "Onde estamos" %}</span>
+                                <span class="contacto-valor">{% trans "Oeiras, junto à Quinta do Marquês" %}</span>
                             </span>
                         </div>
                     </li>
@@ -55,7 +55,7 @@
             </section>
 
             <section class="col-lg-7" aria-labelledby="titulo-onde-estamos">
-                <h2 id="titulo-onde-estamos" class="titulo-seccao">Onde estamos</h2>
+                <h2 id="titulo-onde-estamos" class="titulo-seccao">{% trans "Onde estamos" %}</h2>
                 {% include "sitepizza/_mapa.html" with eager=True sizes="(max-width: 575.98px) calc(100vw - 72px), (max-width: 991.98px) calc(85vw - 144px), calc(50vw - 100px)" %}
             </section>
         </div>

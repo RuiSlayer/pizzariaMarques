@@ -1,26 +1,26 @@
 {% extends "sitepizza/template.html" %}
-{% load icones %}
+{% load i18n icones traducoes %}
 
-{% block titulo %}Pedido finalizado · Pizzaria Marquês{% endblock %}
+{% block titulo %}{% trans "Pedido finalizado · Pizzaria Marquês" %}{% endblock %}
 
 {% block static %}
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
             <div class="divisao com-selo confirmacao">
-                {% include "sitepizza/_selo.html" with titulo="Obrigado!" %}
-                <p class="texto-intro">A tua comida está a caminho, {{ request.user }}.</p>
+                {% include "sitepizza/_selo.html" with titulo=_("Obrigado!") %}
+                <p class="texto-intro">{% blocktrans with nome=request.user.username %}A tua comida está a caminho, {{ nome }}.{% endblocktrans %}</p>
 
-                <h2 class="titulo-seccao">Detalhes do pedido</h2>
+                <h2 class="titulo-seccao">{% trans "Detalhes do pedido" %}</h2>
                 <dl class="perfil-dados">
-                    <dt>N.º do pedido</dt><dd>{{ checkout.pedido.id }}</dd>
-                    <dt>Entrega</dt><dd>{{ checkout.metEntrega }}</dd>
-                    <dt>Pagamento</dt><dd>{{ checkout.metPagamento }}</dd>
-                    <dt>Morada</dt><dd>{{ checkout.morada }}</dd>
-                    <dt>Total</dt><dd><strong>{{ pedido.valorPedido }}&nbsp;€</strong></dd>
+                    <dt>{% trans "N.º do pedido" %}</dt><dd>{{ checkout.pedido.id }}</dd>
+                    <dt>{% trans "Entrega" %}</dt><dd>{{ checkout.metEntrega|traduzir }}</dd>
+                    <dt>{% trans "Pagamento" %}</dt><dd>{{ checkout.metPagamento|traduzir }}</dd>
+                    <dt>{% trans "Morada" %}</dt><dd>{{ checkout.morada|traduzir }}</dd>
+                    <dt>{% trans "Total" %}</dt><dd><strong>{{ pedido.valorPedido }}&nbsp;€</strong></dd>
                 </dl>
 
-                <a class="botao" href="{% url 'navegar:menu' %}">{% icone "utensils" %} Voltar ao menu</a>
+                <a class="botao" href="{% url 'navegar:menu' %}">{% icone "utensils" %} {% trans "Voltar ao menu" %}</a>
             </div>
         </div>
     </div>

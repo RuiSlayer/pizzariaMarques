@@ -1,7 +1,7 @@
 {% extends "sitepizza/template.html" %}
-{% load imagens icones %}
+{% load i18n imagens icones traducoes %}
 
-{% block titulo %}Carrinho · Pizzaria Marquês{% endblock %}
+{% block titulo %}{% trans "Carrinho · Pizzaria Marquês" %}{% endblock %}
 
 {% block static %}
 <div class="container">
@@ -9,44 +9,44 @@
 
         <div class="col-lg-6">
             <div class="divisao com-selo">
-                {% include "sitepizza/_selo.html" with titulo="Checkout" %}
+                {% include "sitepizza/_selo.html" with titulo=_("Checkout") %}
 
                 <form id="form-checkout" action="{% url 'navegar:finalizar' %}" method="post">
                     {% csrf_token %}
 
                     <fieldset class="checkout-grupo">
-                        <legend class="titulo-seccao">Método de envio</legend>
+                        <legend class="titulo-seccao">{% trans "Método de envio" %}</legend>
                         <div class="opcoes">
-                            <label class="opcao"><input type="radio" name="entrega" value="Entrega em casa" required> Entrega em casa</label>
-                            <label class="opcao"><input type="radio" name="entrega" value="Recolha no restaurante"> Recolha no restaurante</label>
+                            <label class="opcao"><input type="radio" name="entrega" value="Entrega em casa" required> {% trans "Entrega em casa" %}</label>
+                            <label class="opcao"><input type="radio" name="entrega" value="Recolha no restaurante"> {% trans "Recolha no restaurante" %}</label>
                         </div>
                     </fieldset>
 
                     <fieldset class="checkout-grupo">
-                        <legend class="titulo-seccao">Detalhes de entrega</legend>
+                        <legend class="titulo-seccao">{% trans "Detalhes de entrega" %}</legend>
                         <div class="opcoes opcoes-coluna">
                             <label class="opcao">
                                 <input type="radio" name="morada" value="{{ perfil.morada }}" data-revela="morada-registada">
-                                Morada registada
+                                {% trans "Morada registada" %}
                             </label>
-                            <p class="opcao-detalhe" id="morada-registada" hidden>{{ perfil.morada|default:"Ainda não tens uma morada registada." }}</p>
+                            <p class="opcao-detalhe" id="morada-registada" hidden>{% if perfil.morada %}{{ perfil.morada }}{% else %}{% trans "Ainda não tens uma morada registada." %}{% endif %}</p>
 
                             <label class="opcao">
                                 <input type="radio" name="morada" value="morada2" data-revela="morada-outra">
-                                Outra morada
+                                {% trans "Outra morada" %}
                             </label>
                             <div class="opcao-detalhe" id="morada-outra" hidden>
-                                <label class="visually-hidden" for="morada-nova">Nova morada</label>
-                                <input class="form-control" type="text" id="morada-nova" name="morada-nova" placeholder="Ex.: Rua da Rosa n.º 2, 1.º Esq." autocomplete="street-address">
+                                <label class="visually-hidden" for="morada-nova">{% trans "Nova morada" %}</label>
+                                <input class="form-control" type="text" id="morada-nova" name="morada-nova" maxlength="{{ morada_max }}" placeholder="{% trans 'Ex.: Rua da Rosa n.º 2, 1.º Esq.' %}" autocomplete="street-address">
                             </div>
                         </div>
                     </fieldset>
 
                     <fieldset class="checkout-grupo">
-                        <legend class="titulo-seccao">Método de pagamento</legend>
+                        <legend class="titulo-seccao">{% trans "Método de pagamento" %}</legend>
                         <div class="opcoes">
-                            <label class="opcao"><input type="radio" name="pagamento" value="Dinheiro" required> {% icone "money-bill-alt" %} Dinheiro</label>
-                            <label class="opcao"><input type="radio" name="pagamento" value="Cartao"> {% icone "credit-card" %} Cartão</label>
+                            <label class="opcao"><input type="radio" name="pagamento" value="Dinheiro" required> {% icone "money-bill-alt" %} {% trans "Dinheiro" %}</label>
+                            <label class="opcao"><input type="radio" name="pagamento" value="Cartao"> {% icone "credit-card" %} {% trans "Cartão" %}</label>
                             <label class="opcao"><input type="radio" name="pagamento" value="Mbway"> {% icone "mobile-alt" %} MB WAY</label>
                         </div>
                     </fieldset>
@@ -56,40 +56,51 @@
 
         <div class="col-lg-6">
             <section class="divisao carrinho" aria-labelledby="titulo-carrinho">
-                <h2 id="titulo-carrinho" class="titulo-seccao">Carrinho</h2>
+                <h2 id="titulo-carrinho" class="titulo-seccao" tabindex="-1">{% trans "Carrinho" %}</h2>
 
                 {% if produtos_pedido %}
-                <ul class="lista-carrinho">
+                <ul class="lista-carrinho" data-lista-carrinho>
                     {% for produto_pedido in produtos_pedido %}
-                    <li class="item-carrinho">
+                    {% with nome=produto_pedido.produto.nome|traduzir qtd=produto_pedido.quantidade %}
+                    <li class="item-carrinho" id="item-{{ produto_pedido.produto.id }}">
                         {% imagem_responsiva produto_pedido.produto.image sizes="(max-width: 575.98px) 56px, 72px" alt="" classe="item-carrinho-foto" %}
                         <div class="item-carrinho-info">
-                            <h3 class="produto-nome">{{ produto_pedido.produto }}</h3>
-                            <p class="item-carrinho-qtd">Quantidade: {{ produto_pedido.quantidade }}</p>
+                            <h3 class="produto-nome">{{ nome }}</h3>
+                            <p class="item-carrinho-unitario">{% blocktrans with preco=produto_pedido.produto.preco %}{{ preco }}&nbsp;€ cada{% endblocktrans %}</p>
                         </div>
-                        <p class="item-carrinho-preco">{{ produto_pedido.precoprodutos }}&nbsp;€</p>
-                        <form action="{% url 'navegar:remove_do_carrinho' %}" method="post">
+                        <p class="item-carrinho-preco"><span data-item-linha>{{ produto_pedido.precoprodutos }}</span>&nbsp;€</p>
+                        {# − n + like the menu; each button posts the quantity it leads to (works without JS too). #}
+                        <form class="item-carrinho-acoes" action="{% url 'navegar:alterar_carrinho' %}" method="post" data-carrinho data-max="{{ qtd_maxima }}">
                             {% csrf_token %}
-                            <input type="hidden" name="produtopizza" value="{{ produto_pedido.produto.id }}">
-                            <button class="botao botao-contorno botao-pequeno" type="submit">
-                                {% icone "trash-alt" %} Remover<span class="visually-hidden"> {{ produto_pedido.produto }}</span>
+                            <input type="hidden" name="produto" value="{{ produto_pedido.produto.id }}">
+                            <div class="qtd" role="group" aria-label="{% blocktrans %}Quantidade de {{ nome }}{% endblocktrans %}">
+                                <button class="qtd-botao" type="submit" name="quantidade" value="{{ qtd|add:-1 }}" data-carrinho-passo="-1" aria-label="{% trans 'Diminuir quantidade' %}"{% if qtd <= 1 %} disabled{% endif %}>{% icone "minus" %}</button>
+                                <span class="qtd-valor" data-item-qtd>{{ qtd }}</span>
+                                <button class="qtd-botao" type="submit" name="quantidade" value="{{ qtd|add:1 }}" data-carrinho-passo="1" aria-label="{% trans 'Aumentar quantidade' %}"{% if qtd >= qtd_maxima %} disabled{% endif %}>{% icone "plus" %}</button>
+                            </div>
+                            <button class="botao botao-contorno botao-remover" type="submit" name="quantidade" value="0">
+                                {% icone "trash-alt" %}<span class="botao-remover-texto">{% trans "Remover" %}</span><span class="visually-hidden"> {{ nome }}</span>
                             </button>
                         </form>
                     </li>
+                    {% endwith %}
                     {% endfor %}
                 </ul>
-                {% else %}
-                <p class="carrinho-vazio">O carrinho está vazio. <a href="{% url 'navegar:menu' %}">Vê o menu</a> e escolhe a tua pizza.</p>
                 {% endif %}
+                {% url 'navegar:menu' as url_menu %}
+                <p class="carrinho-vazio" data-carrinho-vazio{% if produtos_pedido %} hidden{% endif %}>{% blocktrans %}O carrinho está vazio. <a href="{{ url_menu }}">Vê o menu</a> e escolhe a tua pizza.{% endblocktrans %}</p>
 
                 <div class="carrinho-total">
-                    <p>Subtotal <strong>{{ pedido.subtotal }}&nbsp;€</strong></p>
-                    <button class="botao botao-grande" type="submit" form="form-checkout"{% if not produtos_pedido %} disabled{% endif %}>
-                        {% icone "truck" %} Finalizar pedido
+                    <p>{% trans "Subtotal" %} <strong><span data-carrinho-subtotal>{{ pedido.subtotal }}</span>&nbsp;€</strong></p>
+                    <button class="botao botao-grande" type="submit" form="form-checkout" data-finalizar{% if not produtos_pedido %} disabled{% endif %}>
+                        {% icone "truck" %} {% trans "Finalizar pedido" %}
                     </button>
                 </div>
             </section>
         </div>
     </div>
 </div>
+
+{# Cart changes made with JS, for screen readers. #}
+<p class="visually-hidden" role="status" data-aviso-leitor></p>
 {% endblock %}

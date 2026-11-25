@@ -1,0 +1,10 @@
+{% load i18n icones %}
+{% comment %}
+Quantity stepper: − [n] +. The field is a plain number input (type or use the arrow keys, and
+the only control without JS); site.js drives the buttons. Params: nome (product, for the label).
+{% endcomment %}
+<div class="qtd" role="group" aria-label="{% blocktrans %}Quantidade de {{ nome }}{% endblocktrans %}">
+    <button class="qtd-botao" type="button" data-qtd-passo="-1" aria-label="{% trans 'Diminuir quantidade' %}" aria-disabled="true">{% icone "minus" %}</button>
+    <input class="qtd-valor" type="number" name="quantidade" value="1" min="1" max="{{ qtd_maxima }}" step="1" inputmode="numeric" aria-label="{% trans 'Quantidade' %}" data-qtd-anuncio="{% trans 'Quantidade' %}">
+    <button class="qtd-botao" type="button" data-qtd-passo="1" aria-label="{% trans 'Aumentar quantidade' %}">{% icone "plus" %}</button>
+</div>

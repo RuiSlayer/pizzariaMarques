@@ -60,6 +60,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'sitepizza.idioma.IdiomaMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -78,8 +79,11 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sitepizza.contexto.carrinho',
+                'sitepizza.contexto.limites',
             ],
         },
     },
@@ -137,6 +141,17 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'pt-pt'
+
+# The site is Portuguese; English is offered through the PT / EN switch in the header
+# (sitepizza/templates/sitepizza/_idioma.html). The choice is kept in the django_language cookie
+# by Django's set_language view; sitepizza.idioma.IdiomaMiddleware applies it.
+LANGUAGES = [
+    ('pt-pt', 'Português'),
+    ('en', 'English'),
+]
+LOCALE_PATHS = [BASE_DIR / 'sitepizza' / 'locale']
+LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60
+LANGUAGE_COOKIE_SAMESITE = 'Lax'
 
 TIME_ZONE = 'Europe/Lisbon'
 

@@ -1,10 +1,10 @@
 {% extends "sitepizza/login.html" %}
-{% load icones %}
+{% load i18n icones %}
 
-{% block titulo_conta %}Criar conta{% endblock %}
+{% block titulo_conta %}{% trans "Criar conta" %}{% endblock %}
 
 {% block formulario %}
-<h1 class="conta-titulo">Criar conta</h1>
+<h1 class="conta-titulo">{% trans "Criar conta" %}</h1>
 
 {% for erro in form.non_field_errors %}
 <p class="alert alert-danger" role="alert">{{ erro }}</p>
@@ -18,8 +18,8 @@
     {% include "sitepizza/_campo.html" with campo=form.password2 icone="key" %}
     {% include "sitepizza/_campo.html" with campo=perfil_form.morada icone="map-marker-alt" %}
     {% include "sitepizza/_campo.html" with campo=perfil_form.telemovel icone="mobile-alt" %}
-    <button class="botao botao-grande botao-bloco" type="submit">{% icone "user-plus" %} Criar conta</button>
+    <button class="botao botao-grande botao-bloco" type="submit">{% icone "user-plus" %} {% trans "Criar conta" %}</button>
 </form>
 
-<p class="conta-alternativa">Já tens conta? <a href="{% url 'navegar:login' %}">Entrar</a></p>
+<p class="conta-alternativa">{% trans "Já tens conta?" %} <a href="{% url 'navegar:login' %}">{% trans "Entrar" %}</a></p>
 {% endblock %}
